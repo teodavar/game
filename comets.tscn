@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=3 uid="uid://dp48tk7ctl8s2"]
+
+[ext_resource type="Texture2D" uid="uid://ctbtkmcl0jc4c" path="res://test/comet-svgrepo-com.svg" id="1_3oiku"]
+[ext_resource type="Script" uid="uid://s5wkpl15f5v2" path="res://comets.gd" id="1_6u7rb"]
+[ext_resource type="Texture2D" uid="uid://7faic6x03egg" path="res://test/comet-line-svgrepo-com.svg" id="3_lckfe"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_squbt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_3oiku")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_lckfe")
+}],
+"loop": true,
+"name": &"fall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_lckfe")
+}],
+"loop": true,
+"name": &"fall2",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_m0iu1"]
+radius = 20.024984
+
+[node name="comet" type="RigidBody2D"]
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("1_6u7rb")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+rotation = 2.3561945
+scale = Vector2(0.1, 0.1)
+sprite_frames = SubResource("SpriteFrames_squbt")
+animation = &"fall"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 13)
+shape = SubResource("CircleShape2D_m0iu1")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://d1kphst6t2fxc"]
+
+[ext_resource type="Script" uid="uid://ckcimn22h2maf" path="res://spaceship.gd" id="1_dl81w"]
+[ext_resource type="Texture2D" uid="uid://cqiy7ebiobfec" path="res://test/spaceship-svgrepo-com.svg" id="2_5rgpn"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_c0nl8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_5rgpn")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"fly2",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1dtnr"]
+radius = 22.0
+height = 112.0
+
+[node name="Spaceship" type="Area2D"]
+script = ExtResource("1_dl81w")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-6, 6)
+rotation = -0.5235988
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_c0nl8")
+animation = &"fly"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 6)
+shape = SubResource("CapsuleShape2D_1dtnr")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
