@@ -1,8 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://de8pbjay47e46"]
+[gd_scene load_steps=8 format=3 uid="uid://de8pbjay47e46"]
 
 [ext_resource type="Script" uid="uid://b4fout3yjkh4" path="res://main.gd" id="1_h2yge"]
 [ext_resource type="PackedScene" uid="uid://d1kphst6t2fxc" path="res://spaceship.tscn" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://dp48tk7ctl8s2" path="res://comets.tscn" id="2_1bvp3"]
+[ext_resource type="Shader" uid="uid://dr4s25b4smy33" path="res://scroll_background.gdshader" id="3_lquwl"]
+[ext_resource type="Texture2D" uid="uid://dh034g8tu7ikb" path="res://test/pexels-alex-andrews-271121-816608.jpg" id="4_lquwl"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_272bh"]
+shader = ExtResource("3_lquwl")
 
 [sub_resource type="Curve2D" id="Curve2D_ig7tw"]
 _data = {
@@ -14,7 +19,18 @@ point_count = 3
 script = ExtResource("1_h2yge")
 comet_scene = ExtResource("2_1bvp3")
 
+[node name="TextureRect" type="TextureRect" parent="."]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_272bh")
+offset_left = -12.0
+offset_top = -17.0
+offset_right = 493.0
+offset_bottom = 736.0
+texture = ExtResource("4_lquwl")
+expand_mode = 1
+
 [node name="Spaceship" parent="." instance=ExtResource("1_ig7tw")]
+position = Vector2(181, 95)
 
 [node name="CometTimer" type="Timer" parent="."]
 wait_time = 0.5

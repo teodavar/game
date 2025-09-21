@@ -29,11 +29,24 @@ func _process(delta: float) -> void:
 
 
 func _on_body_entered(body: Node2D) -> void:
-	hide()
+	# body: the object that hits the spaceship
+	
+	print(body.get_name()) # prints the name of the class!
+	body.collision_with_spacceship()
+	#print(position)
+	#position=position.clamp(position-Vector2(0,150),screen_size)
+	position=position+Vector2(0,50) # recoil after hit
+	position=position.clamp(Vector2.ZERO,screen_size)
+	#print(position)
+	#hide()
 	hit.emit()
 	#$CollisionShape2D.set_deferred("disabled",true)
-	 # Replace with function body.
+	
 func	 start(pos):
 	position =pos
+	show()
+	$CollisionShape2D.disabled=false 
+	
+func haha():
 	show()
 	$CollisionShape2D.disabled=false 

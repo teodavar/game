@@ -29,9 +29,11 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_m0iu1"]
 radius = 20.024984
 
-[node name="comet" type="RigidBody2D"]
-collision_mask = 0
+[node name="comet" type="RigidBody2D" groups=["comets2"]]
+collision_layer = 2
 gravity_scale = 0.0
+contact_monitor = true
+max_contacts_reported = 1
 script = ExtResource("1_6u7rb")
 metadata/_edit_group_ = true
 
@@ -40,7 +42,6 @@ rotation = 2.3561945
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_squbt")
 animation = &"fall"
-frame_progress = 0.9950475
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 13)

@@ -20,22 +20,23 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1dtnr"]
-radius = 22.0
-height = 112.0
+radius = 14.0
+height = 84.0
 
 [node name="Spaceship" type="Area2D"]
+collision_mask = 3
 script = ExtResource("1_dl81w")
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(-6, 6)
+position = Vector2(-3.0000005, -7.0000005)
 rotation = -0.5235988
-scale = Vector2(4, 4)
+scale = Vector2(0.15, 0.15)
 sprite_frames = SubResource("SpriteFrames_c0nl8")
 animation = &"fly"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 6)
+position = Vector2(1, -7)
 shape = SubResource("CapsuleShape2D_1dtnr")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

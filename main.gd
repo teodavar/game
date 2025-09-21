@@ -15,7 +15,9 @@ func _process(delta: float) -> void:
 func game_over():
 	$ScoreTimer.stop()
 	$MobTimer.stop()
-	reset.emit()
+	#reset.emit()
+	
+	
 func new_game():
 	score=0
 	$Spaceship.start($StartPosition.position)
@@ -23,9 +25,12 @@ func new_game():
 	
 
 func _on_spaceship_hit() -> void:
-	reset.emit()
+	#print("11111111")
+	#reset.emit()
 	score=0
-	$Spaceship.start($StartPosition.position) # Replace with function body.
+	#$Spaceship.haha()
+	#$Spaceship.start($StartPosition.position) 
+	#get_tree().call_group("comets2", "queue_free")
 
 
 func _on_comet_timer_timeout() -> void:
