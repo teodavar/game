@@ -8,7 +8,8 @@ func _ready() -> void:
 	$AnimatedSprite2D.play
 	 # Replace with function body.
 
-
+func _on_parent_reset() -> void:
+	queue_free() # Replace with function body.
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass

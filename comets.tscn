@@ -40,6 +40,7 @@ rotation = 2.3561945
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_squbt")
 animation = &"fall"
+frame_progress = 0.9950475
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 13)

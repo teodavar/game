@@ -1,14 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://de8pbjay47e46"]
+[gd_scene load_steps=5 format=3 uid="uid://de8pbjay47e46"]
 
+[ext_resource type="Script" uid="uid://b4fout3yjkh4" path="res://main.gd" id="1_h2yge"]
 [ext_resource type="PackedScene" uid="uid://d1kphst6t2fxc" path="res://spaceship.tscn" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://dp48tk7ctl8s2" path="res://comets.tscn" id="2_1bvp3"]
 
 [sub_resource type="Curve2D" id="Curve2D_ig7tw"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 480, 3, 0, 0, 0, 0, 479, 724, 0, 0, 0, 0, 3, 725, 0, 0, 0, 0, 1, 0)
+"points": PackedVector2Array(0, 0, 0, 0, -104.58931, -60.981724, 0, 0, 0, 0, 536.06024, -60.981724, 0, 0, 0, 0, 533.19385, 840.2036)
 }
-point_count = 5
+point_count = 3
 
 [node name="Main" type="Node"]
+script = ExtResource("1_h2yge")
+comet_scene = ExtResource("2_1bvp3")
 
 [node name="Spaceship" parent="." instance=ExtResource("1_ig7tw")]
 
@@ -24,9 +28,15 @@ one_shot = true
 [node name="StartPosition" type="Marker2D" parent="."]
 position = Vector2(240, 450)
 
-[node name="Path2D" type="Path2D" parent="."]
+[node name="CometPath" type="Path2D" parent="."]
+position = Vector2(107.97503, 40.856655)
+scale = Vector2(0.69772935, 0.65358365)
 curve = SubResource("Curve2D_ig7tw")
 
-[node name="CometSpawn" type="PathFollow2D" parent="Path2D"]
-position = Vector2(1, 0)
-rotation = 0.006262966
+[node name="CometSpawn" type="PathFollow2D" parent="CometPath"]
+position = Vector2(-104.58931, -60.981724)
+
+[connection signal="hit" from="Spaceship" to="." method="_on_spaceship_hit"]
+[connection signal="timeout" from="CometTimer" to="." method="_on_comet_timer_timeout"]
+[connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]
+[connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
