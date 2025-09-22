@@ -1,13 +1,13 @@
 [gd_scene load_steps=5 format=3 uid="uid://d1kphst6t2fxc"]
 
-[ext_resource type="Script" uid="uid://ckcimn22h2maf" path="res://spaceship.gd" id="1_dl81w"]
-[ext_resource type="Texture2D" uid="uid://cqiy7ebiobfec" path="res://test/spaceship-svgrepo-com.svg" id="2_5rgpn"]
+[ext_resource type="Script" uid="uid://ckcimn22h2maf" path="res://scripts/spaceship.gd" id="1_dl81w"]
+[ext_resource type="Texture2D" uid="uid://dbpblxkii4s0v" path="res://assets/spaceship.transparent.png" id="2_2oxxg"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_c0nl8"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_5rgpn")
+"texture": ExtResource("2_2oxxg")
 }],
 "loop": true,
 "name": &"fly",
@@ -24,19 +24,19 @@ radius = 14.0
 height = 84.0
 
 [node name="Spaceship" type="Area2D"]
+position = Vector2(0, 3)
 collision_mask = 3
 script = ExtResource("1_dl81w")
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(-3.0000005, -7.0000005)
-rotation = -0.5235988
-scale = Vector2(0.15, 0.15)
+scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_c0nl8")
 animation = &"fly"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, -7)
+position = Vector2(1, 0.8)
+scale = Vector2(1.5, 1)
 shape = SubResource("CapsuleShape2D_1dtnr")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

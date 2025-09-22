@@ -1,17 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://dp48tk7ctl8s2"]
+[gd_scene load_steps=5 format=3 uid="uid://dp48tk7ctl8s2"]
 
-[ext_resource type="Texture2D" uid="uid://ctbtkmcl0jc4c" path="res://test/comet-svgrepo-com.svg" id="1_3oiku"]
-[ext_resource type="Script" uid="uid://s5wkpl15f5v2" path="res://comets.gd" id="1_6u7rb"]
-[ext_resource type="Texture2D" uid="uid://7faic6x03egg" path="res://test/comet-line-svgrepo-com.svg" id="3_lckfe"]
+[ext_resource type="Script" uid="uid://s5wkpl15f5v2" path="res://scripts/comets.gd" id="1_6u7rb"]
+[ext_resource type="Texture2D" uid="uid://bovqhv7g28usp" path="res://assets/Textures/a_1.t.png" id="2_adq4h"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_squbt"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_3oiku")
-}, {
-"duration": 1.0,
-"texture": ExtResource("3_lckfe")
+"texture": ExtResource("2_adq4h")
 }],
 "loop": true,
 "name": &"fall",
@@ -19,7 +15,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_lckfe")
+"texture": ExtResource("2_adq4h")
 }],
 "loop": true,
 "name": &"fall2",
@@ -41,10 +37,10 @@ metadata/_edit_group_ = true
 rotation = 2.3561945
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_squbt")
-animation = &"fall"
+animation = &"fall2"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 13)
+position = Vector2(2, 2)
 shape = SubResource("CircleShape2D_m0iu1")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
