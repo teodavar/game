@@ -1,9 +1,9 @@
 [gd_scene load_steps=8 format=3 uid="uid://de8pbjay47e46"]
 
-[ext_resource type="Script" uid="uid://b4fout3yjkh4" path="res://scripts/main.gd" id="1_h2yge"]
-[ext_resource type="PackedScene" uid="uid://d1kphst6t2fxc" path="res://scene/spaceship.tscn" id="1_ig7tw"]
-[ext_resource type="PackedScene" uid="uid://dp48tk7ctl8s2" path="res://scene/comets.tscn" id="2_1bvp3"]
-[ext_resource type="Shader" uid="uid://dr4s25b4smy33" path="res://assets/scroll_background.gdshader" id="3_lquwl"]
+[ext_resource type="Script" uid="uid://b4fout3yjkh4" path="res://main.gd" id="1_h2yge"]
+[ext_resource type="PackedScene" uid="uid://d1kphst6t2fxc" path="res://spaceship.tscn" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://dp48tk7ctl8s2" path="res://comets.tscn" id="2_1bvp3"]
+[ext_resource type="Shader" uid="uid://dr4s25b4smy33" path="res://scroll_background.gdshader" id="3_lquwl"]
 [ext_resource type="Texture2D" uid="uid://dh034g8tu7ikb" path="res://test/pexels-alex-andrews-271121-816608.jpg" id="4_lquwl"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_272bh"]
