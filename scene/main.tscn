@@ -1,0 +1,70 @@
+[gd_scene load_steps=11 format=3 uid="uid://de8pbjay47e46"]
+
+[ext_resource type="Script" uid="uid://b4fout3yjkh4" path="res://scripts/main.gd" id="1_h2yge"]
+[ext_resource type="PackedScene" uid="uid://d1kphst6t2fxc" path="res://scene/spaceship.tscn" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://dp48tk7ctl8s2" path="res://scene/comets.tscn" id="2_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://3r8r1yvx0vc0" path="res://scene/asteroid.tscn" id="3_4j5ol"]
+[ext_resource type="Shader" uid="uid://dr4s25b4smy33" path="res://assets/scroll_background.gdshader" id="3_lquwl"]
+[ext_resource type="Texture2D" uid="uid://dh034g8tu7ikb" path="res://test/pexels-alex-andrews-271121-816608.jpg" id="4_lquwl"]
+[ext_resource type="PackedScene" uid="uid://dcdkapui08olm" path="res://scene/spaceobjectsingle.tscn" id="4_p1hux"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_272bh"]
+shader = ExtResource("3_lquwl")
+
+[sub_resource type="Curve2D" id="Curve2D_ig7tw"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 32, -43, 0, 0, 0, 0, 1306, -37, 0, 0, 0, 0, 1314, 692)
+}
+point_count = 3
+
+[sub_resource type="Curve2D" id="Curve2D_p1hux"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1227, 315, 0, 0, 0, 0, 793, 164)
+}
+point_count = 2
+
+[node name="Main" type="Node"]
+script = ExtResource("1_h2yge")
+comet_scene = ExtResource("2_1bvp3")
+asteroid_scene = ExtResource("3_4j5ol")
+field_scene = ExtResource("4_p1hux")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_272bh")
+offset_left = -20.0
+offset_top = -11.0
+offset_right = 1307.0
+offset_bottom = 742.0
+texture = ExtResource("4_lquwl")
+expand_mode = 1
+
+[node name="Spaceship" parent="." instance=ExtResource("1_ig7tw")]
+position = Vector2(181, 95)
+
+[node name="CometTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="ScoreTimer" type="Timer" parent="."]
+
+[node name="StartTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="StartPosition" type="Marker2D" parent="."]
+position = Vector2(640, 600)
+
+[node name="CometPath" type="Path2D" parent="."]
+curve = SubResource("Curve2D_ig7tw")
+
+[node name="CometSpawn" type="PathFollow2D" parent="CometPath"]
+position = Vector2(32, -43)
+rotation = 0.004709541
+
+[node name="spawnpath" type="Path2D" parent="."]
+curve = SubResource("Curve2D_p1hux")
+
+[connection signal="hit" from="Spaceship" to="." method="_on_spaceship_hit"]
+[connection signal="timeout" from="CometTimer" to="." method="_on_comet_timer_timeout"]
+[connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]
+[connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
