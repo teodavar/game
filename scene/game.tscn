@@ -1,0 +1,90 @@
+[gd_scene load_steps=10 format=3 uid="uid://de8pbjay47e46"]
+
+[ext_resource type="Script" uid="uid://b4fout3yjkh4" path="res://scripts/main.gd" id="1_qpk70"]
+[ext_resource type="PackedScene" uid="uid://dp48tk7ctl8s2" path="res://scene/comets.tscn" id="2_ll5lq"]
+[ext_resource type="Shader" uid="uid://dr4s25b4smy33" path="res://assets/scroll_background.gdshader" id="3_17rxn"]
+[ext_resource type="Script" uid="uid://bdrx5tca00iwc" path="res://scripts/hud.gd" id="3_xlg7c"]
+[ext_resource type="Texture2D" uid="uid://cie1bx3gyh4s0" path="res://assets/Textures/SpaceBackground_Suerza.png" id="4_yq8tf"]
+[ext_resource type="PackedScene" uid="uid://bs2nhdcxvrk3o" path="res://scene/LifeCards.tscn" id="5_qpk70"]
+[ext_resource type="PackedScene" uid="uid://d1kphst6t2fxc" path="res://scene/spaceship.tscn" id="6_sng2h"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_272bh"]
+shader = ExtResource("3_17rxn")
+
+[sub_resource type="Curve2D" id="Curve2D_ig7tw"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -104.58931, -60.981724, 0, 0, 0, 0, 536.06024, -60.981724, 0, 0, 0, 0, 1494.8848, 1750.5692)
+}
+point_count = 3
+
+[node name="Game" type="Node"]
+script = ExtResource("1_qpk70")
+comet_scene = ExtResource("2_ll5lq")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource("3_xlg7c")
+
+[node name="LivesLabel" type="Label" parent="HUD"]
+visible = false
+anchors_preset = -1
+anchor_left = 0.002
+anchor_right = 0.037
+anchor_bottom = 0.019000001
+offset_left = -0.30400014
+offset_right = 40.376
+offset_bottom = 0.19999886
+grow_horizontal = 2
+grow_vertical = 2
+text = "3"
+
+[node name="Cards" type="HBoxContainer" parent="HUD"]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/separation = 48
+alignment = 1
+
+[node name="Card1" parent="HUD/Cards" instance=ExtResource("5_qpk70")]
+layout_mode = 2
+
+[node name="Card2" parent="HUD/Cards" instance=ExtResource("5_qpk70")]
+layout_mode = 2
+
+[node name="Card3" parent="HUD/Cards" instance=ExtResource("5_qpk70")]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_272bh")
+offset_left = 7.0
+offset_top = -6.0
+offset_right = 1177.0
+offset_bottom = 1197.0
+texture = ExtResource("4_yq8tf")
+expand_mode = 1
+
+[node name="Spaceship" parent="." instance=ExtResource("6_sng2h")]
+position = Vector2(181, 95)
+
+[node name="CometTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="ScoreTimer" type="Timer" parent="."]
+
+[node name="StartTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="StartPosition" type="Marker2D" parent="."]
+position = Vector2(570, 1038)
+
+[node name="CometPath" type="Path2D" parent="."]
+position = Vector2(1177.7014, 35.05863)
+scale = Vector2(0.17880887, 0.65689576)
+curve = SubResource("Curve2D_ig7tw")
+
+[node name="CometSpawn" type="PathFollow2D" parent="CometPath"]
+position = Vector2(-104.58931, -60.981724)
+
+[connection signal="timeout" from="CometTimer" to="." method="_on_comet_timer_timeout"]
+[connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]
+[connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
