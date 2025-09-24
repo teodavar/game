@@ -43,12 +43,12 @@ sprite_frames = SubResource("SpriteFrames_squbt")
 animation = &"fall"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(17, 18)
+position = Vector2(26, 1)
 rotation = 1.5027285
 shape = SubResource("CapsuleShape2D_uo68c")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-position = Vector2(-3, 3)
+position = Vector2(14, 2)
 rotation = 1.5027285
 rect = Rect2(-54.853428, -100.919876, 113.49154, 216.92984)
 
