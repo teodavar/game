@@ -23,7 +23,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_m0iu1"]
-radius = 15.0
+radius = 20.024984
 
 [node name="comet" type="RigidBody2D" groups=["comet", "comets2"]]
 collision_layer = 2
@@ -44,7 +44,6 @@ position = Vector2(2, 2)
 shape = SubResource("CircleShape2D_m0iu1")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-rect = Rect2(-18, -18, 40, 40)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
