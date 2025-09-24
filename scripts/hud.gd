@@ -25,25 +25,36 @@ func _ready() -> void:
 
 func update_lives(current: int) -> void:
 	#lives_label.text = "Lives: %d" % current
+	for i in range(cards.size()):
+		var should_show := i < current
+		var card := cards[i]
+		if card.visible and not should_show:
+			card.play_hit_feedback()
+			await get_tree().create_timer(0.05).timeout
+			card.play_lost_feedback()
+		elif not card.visible and should_show:
+			card.visible = true
+			card.scale = Vector2.ONE
+			card.modulate = Color(1,1,1,1)
 	# load a single placeholder icon
 	
 	# show hit feedback on the life that was just lost (if shrinking)
 	# lives go 3→2→1→0. We’ll remove from right to left for drama.
 	# First, play hit on the card that will be lost next (if any).
 	
-	if current >= 0 and current < cards.size():
-		var index_to_remove = clamp(current, 0, cards.size()-1)
-		for i in range (cards.size()):
-			if i >= current:
-				if cards[i].visible:
-					cards[i].play_hit_feedback()
-					await get_tree().create_timer(0.05).timeout
-					cards[i].play_lost_feedback()
-	for i in range(current):
-		if not cards[i].visible:
-			cards[i].visible = true
-			cards[i].scale = Vector2.ONE
-			cards[i].modulate = Color(1,1,1,1)
+	#if current >= 0 and current < cards.size():
+		#var index_to_remove = clamp(current, 0, cards.size()-1)
+		#for i in range (cards.size()):
+			#if i >= current:
+				#if cards[i].visible:
+					#cards[i].play_hit_feedback()
+					#await get_tree().create_timer(0.05).timeout
+					#cards[i].play_lost_feedback()
+	#for i in range(current):
+		#if not cards[i].visible:
+			#cards[i].visible = true
+			#cards[i].scale = Vector2.ONE
+			#cards[i].modulate = Color(1,1,1,1)
 			
 	
 	

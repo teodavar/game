@@ -17,6 +17,7 @@ func _ready() -> void:
 	 # Show game over when ship dies
 	ship.connect("died", Callable(self, "_on_ship_died"))
 	hud.update_lives(ship.lives)
+	#hud.init_lives(ship.lives)
 	
 	# Initialize HUD text
 	hud.update_lives(ship.lives)

@@ -17,6 +17,8 @@ func _ready() -> void:
 	
 	hide()
 	screen_size= get_viewport_rect().size # Replace with function body.
+	
+	
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
