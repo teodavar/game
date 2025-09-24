@@ -77,6 +77,7 @@ func _take_hit() -> void:
 		
 	if lives <= 0:
 		emit_signal("died")
+		queue_free()
 	
 
 	
