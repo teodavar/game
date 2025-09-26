@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://de8pbjay47e46"]
+[gd_scene load_steps=14 format=3 uid="uid://de8pbjay47e46"]
 
 [ext_resource type="Script" uid="uid://b4fout3yjkh4" path="res://scripts/main.gd" id="1_h2yge"]
 [ext_resource type="PackedScene" uid="uid://d1kphst6t2fxc" path="res://scene/spaceship.tscn" id="1_ig7tw"]
@@ -21,7 +21,13 @@ point_count = 3
 
 [sub_resource type="Curve2D" id="Curve2D_p1hux"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 1227, 315, 0, 0, 0, 0, 793, 164)
+"points": PackedVector2Array(0, 0, 0, 0, -36, 91, 0, 0, 0, 0, -46, 458)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_b5f6u"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1380, 137, 0, 0, 0, 0, 1387, 597)
 }
 point_count = 2
 
@@ -79,6 +85,9 @@ curve = SubResource("Curve2D_ig7tw")
 
 [node name="spawnpath" type="Path2D" parent="."]
 curve = SubResource("Curve2D_p1hux")
+
+[node name="sp3" type="Path2D" parent="."]
+curve = SubResource("Curve2D_b5f6u")
 
 [connection signal="died" from="Spaceship" to="HUD" method="_on_spaceship_died"]
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]

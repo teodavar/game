@@ -63,8 +63,8 @@ func fire():
 		#comet.position=Vector2(640, 600)# Replace with function body.
 		object.rotation= direction
 		var scale=randf_range(0.5,2)
-		#object.scale*=scale
-		var velocity=Vector2(randf_range(speed*0.9,speed*1.1 ),0)
+		object.reshape(scale)
+		var velocity=Vector2(randf_range(speed*0.5,speed*2 ),0)
 		object.linear_velocity = velocity.rotated(direction)
 		add_child(object)
 		

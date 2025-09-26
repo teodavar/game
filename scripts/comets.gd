@@ -7,7 +7,9 @@ func _ready() -> void:
 	$AnimatedSprite2D.animation=comet_types[0]
 	$AnimatedSprite2D.play()
 	 # Replace with function body.
-
+func reshape(scale):
+	$AnimatedSprite2D.scale*=scale
+	$CollisionShape2D.scale*=scale
 func _on_parent_reset() -> void:
 	queue_free() # Replace with function body.
 # Called every frame. 'delta' is the elapsed time since the previous frame.
