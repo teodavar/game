@@ -36,7 +36,7 @@ func new_game():
 	$StartTimer.start()
 	print("begin")
 	add_child(field_scene.instantiate().init(comet_scene,$CometPath,3*PI/4,200,0.4,0,0,3))
-	add_child(field_scene.instantiate().init(asteroid_scene,$spawnpath,0,100,1,4,8,1))
+	add_child(field_scene.instantiate().init(asteroid_scene,$spawnpath,0,100,6,0,6,1))
 	add_child(field_scene.instantiate().init(asteroid_scene,$sp3,PI,50,0,0,18,1))
 
 #func _on_spaceship_hit() -> void:

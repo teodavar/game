@@ -45,7 +45,7 @@ func _process(delta: float) -> void:
 
 func boost(velocity):
 	if boost_state==0:
-		if Input.is_action_pressed("boost"):
+		if Input.is_action_pressed("boost") and velocity!=Vector2.ZERO:
 			$boostactive.start()
 			boostvel=velocity*boostspeed
 			boost_state=1
