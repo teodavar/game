@@ -17,7 +17,8 @@ func reshape(scale):
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	queue_free() # Replace with function body.
 
-func collision_with_spacceship() -> void:
+func collision_with_spacceship(ship) -> void:
 	print("death")
+	ship.crashed()
 	#hide()
 	#queue_free()

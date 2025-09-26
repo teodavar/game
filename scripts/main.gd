@@ -14,15 +14,11 @@ signal reset
 func _ready() -> void:
 	new_game() # Replace with function body.
 
-	# Update HUD whenever lives change
-	ship.connect("lives_changed", Callable(hud, "_on_lives_changed"))
-	 # Show game over when ship dies
-	ship.connect("died", Callable(self, "_on_ship_died"))
-	hud.update_lives(ship.lives)
+
 	#hud.init_lives(ship.lives)
 	
 	# Initialize HUD text
-	hud.update_lives(ship.lives)
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -62,10 +58,12 @@ func _on_score_timer_timeout() -> void:
 func _on_start_timer_timeout() -> void:
 	$ScoreTimer.start()
 
-func _on_ship_died() -> void:
-	hud.show_game_over()
-	#ship.set_process(false)
-	#ship.set_physics_process(false)
 	
-func _on_lives_changed(current: int) -> void:
-	hud.update_lives(current)
+
+
+func _on_spaceship_crash() -> void:
+	print("death") # Replace with function body.
+
+
+func _on_spaceship_landing(current_lives: int, planet_id: String) -> void:
+	print("succesful landing on planet ",planet_id) # Replace with function body.

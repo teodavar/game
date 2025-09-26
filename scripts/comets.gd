@@ -19,8 +19,9 @@ func _process(delta: float) -> void:
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	queue_free() # Replace with function body.
 
-func collision_with_spacceship() -> void:
+func collision_with_spacceship(ship) -> void:
 	
 	print("hit")
+	ship.got_hit()
 	hide()
 	queue_free()

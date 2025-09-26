@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://de8pbjay47e46"]
+[gd_scene load_steps=13 format=3 uid="uid://de8pbjay47e46"]
 
 [ext_resource type="Script" uid="uid://b4fout3yjkh4" path="res://scripts/main.gd" id="1_h2yge"]
 [ext_resource type="PackedScene" uid="uid://d1kphst6t2fxc" path="res://scene/spaceship.tscn" id="1_ig7tw"]
@@ -8,7 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://dh034g8tu7ikb" path="res://test/pexels-alex-andrews-271121-816608.jpg" id="4_lquwl"]
 [ext_resource type="PackedScene" uid="uid://dcdkapui08olm" path="res://scene/spaceobjectsingle.tscn" id="4_p1hux"]
 [ext_resource type="PackedScene" uid="uid://jp5ejq7fv784" path="res://scene/hud.tscn" id="5_of57s"]
-[ext_resource type="PackedScene" uid="uid://bs2nhdcxvrk3o" path="res://scene/lifecards.tscn" id="6_b5f6u"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_272bh"]
 shader = ExtResource("3_lquwl")
@@ -38,25 +37,6 @@ asteroid_scene = ExtResource("3_4j5ol")
 field_scene = ExtResource("4_p1hux")
 
 [node name="HUD" parent="." instance=ExtResource("5_of57s")]
-
-[node name="LivesLabel" type="Label" parent="HUD"]
-offset_left = 194.0
-offset_right = 341.0
-offset_bottom = 51.0
-text = "3"
-
-[node name="Cards" type="HBoxContainer" parent="HUD"]
-offset_right = 144.0
-offset_bottom = 43.0
-
-[node name="Card1" parent="HUD/Cards" instance=ExtResource("6_b5f6u")]
-layout_mode = 2
-
-[node name="Card2" parent="HUD/Cards" instance=ExtResource("6_b5f6u")]
-layout_mode = 2
-
-[node name="Card3" parent="HUD/Cards" instance=ExtResource("6_b5f6u")]
-layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="."]
 texture_repeat = 2
@@ -89,6 +69,8 @@ curve = SubResource("Curve2D_p1hux")
 [node name="sp3" type="Path2D" parent="."]
 curve = SubResource("Curve2D_b5f6u")
 
-[connection signal="died" from="Spaceship" to="HUD" method="_on_spaceship_died"]
+[connection signal="crash" from="Spaceship" to="." method="_on_spaceship_crash"]
+[connection signal="landing" from="Spaceship" to="." method="_on_spaceship_landing"]
+[connection signal="lives_changed" from="Spaceship" to="HUD" method="_on_spaceship_lives_changed"]
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]

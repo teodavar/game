@@ -1,4 +1,6 @@
 extends CanvasLayer
+#HUD only controls life display not life logic. removed death check and ending control.
+
 
 #@onready var lives_label: Label = $LivesLabel
 @onready var cards: Array[LifeCard] = [
@@ -58,15 +60,6 @@ func update_lives(current: int) -> void:
 			#cards[i].scale = Vector2.ONE
 			#cards[i].modulate = Color(1,1,1,1)
 			
-	
-	
-	
-func show_game_over() -> void:
-	#lives_label.text = "Game Over"
-	for c in cards:
-		if c.visible:
-			c.play_lost_feedback()
 
-
-func _on_spaceship_died() -> void:
-	pass # Replace with function body.
+func _on_spaceship_lives_changed(current_lives: int) -> void:
+	update_lives(current_lives) # Replace with function body.

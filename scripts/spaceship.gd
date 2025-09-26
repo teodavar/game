@@ -1,8 +1,9 @@
 extends Area2D
 
-#signal hit
 signal lives_changed(current_lives: int)
-signal died
+signal crash
+signal hit
+signal landing(current_lives: int, planet_id: String)
 @export var speed=400
 @export var max_lives: int = 3
 
@@ -41,32 +42,27 @@ func _process(delta: float) -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	# body: the object that hits the spaceship
-	print("In _on_body_entered")
-	if body.is_in_group("comets2"):
-		print("Call _take_hit !!!")
-		_take_hit()
-	
 	print(body.get_name()) # prints the name of the class!
-	body.collision_with_spacceship()
+	body.collision_with_spacceship(self)
 	#print(position)
 	#position=position.clamp(position-Vector2(0,150),screen_size)
-	position=position+Vector2(0,50) # recoil after hit
-	position=position.clamp(Vector2.ZERO,screen_size)
+
 	#print(position)
 	#hide()
 	#hit.emit()
 	#$CollisionShape2D.set_deferred("disabled",true)
+	
+func recoil():
+	position=position+Vector2(0,50) # recoil after hit
+	position=position.clamp(Vector2.ZERO,screen_size)
 	
 func	 start(pos):
 	position =pos
 	show()
 	$CollisionShape2D.disabled=false 
 	
-func haha():
-	show()
-	$CollisionShape2D.disabled=false 
-	
-func _take_hit() -> void:
+func got_hit():
+	recoil()
 	if invulnerable:
 		return
 		
@@ -75,4 +71,23 @@ func _take_hit() -> void:
 	print("lives Left: ", lives)
 		
 	if lives <= 0:
-		emit_signal("died")
+		crashed()
+	else:
+		#recoil()
+		hit.emit()
+func crashed():
+	recoil()
+	if invulnerable:
+		return
+	lives = 0
+	emit_signal("lives_changed", lives)
+	crash.emit()
+	
+func landed(planet_id):
+	landing.emit(lives,planet_id)
+
+	
+func haha():
+	show()
+	$CollisionShape2D.disabled=false 
+	
