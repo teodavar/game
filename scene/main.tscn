@@ -65,9 +65,6 @@ expand_mode = 1
 [node name="Spaceship" parent="." instance=ExtResource("1_ig7tw")]
 position = Vector2(181, 95)
 
-[node name="CometTimer" type="Timer" parent="."]
-wait_time = 0.5
-
 [node name="ScoreTimer" type="Timer" parent="."]
 
 [node name="StartTimer" type="Timer" parent="."]
@@ -80,13 +77,9 @@ position = Vector2(640, 600)
 [node name="CometPath" type="Path2D" parent="."]
 curve = SubResource("Curve2D_ig7tw")
 
-[node name="CometSpawn" type="PathFollow2D" parent="CometPath"]
-position = Vector2(32, -43)
-rotation = 0.004709541
-
 [node name="spawnpath" type="Path2D" parent="."]
 curve = SubResource("Curve2D_p1hux")
 
-[connection signal="timeout" from="CometTimer" to="." method="_on_comet_timer_timeout"]
+[connection signal="died" from="Spaceship" to="HUD" method="_on_spaceship_died"]
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]

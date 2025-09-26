@@ -66,3 +66,7 @@ func show_game_over() -> void:
 	for c in cards:
 		if c.visible:
 			c.play_lost_feedback()
+
+
+func _on_spaceship_died() -> void:
+	pass # Replace with function body.
