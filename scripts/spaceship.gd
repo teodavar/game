@@ -5,11 +5,14 @@ signal crash
 signal hit
 signal landing(current_lives: int, planet_id: String)
 @export var speed=400
+@export var boostspeed=2
 @export var max_lives: int = 3
-
+var boost_state=0 #0 = ready, 1=active, 2=cooldown
 var lives: int = 0
 var invulnerable := false
 var screen_size
+
+var boostvel=Vector2.ZERO
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -36,10 +39,24 @@ func _process(delta: float) -> void:
 		$AnimatedSprite2D.play()
 	else:
 		$AnimatedSprite2D.stop()
+	velocity+=boost(velocity)
 	position+=velocity*delta
 	position=position.clamp(Vector2.ZERO,screen_size)
 
-
+func boost(velocity):
+	if boost_state==0:
+		if Input.is_action_pressed("boost"):
+			$boostactive.start()
+			boostvel=velocity*boostspeed
+			boost_state=1
+			return boostvel
+	if boost_state==1:
+		return boostvel
+	if boost_state==2:
+		boostvel=Vector2.ZERO
+		return boostvel
+	return boostvel
+	
 func _on_body_entered(body: Node2D) -> void:
 	# body: the object that hits the spaceship
 	print(body.get_name()) # prints the name of the class!
@@ -91,3 +108,13 @@ func haha():
 	show()
 	$CollisionShape2D.disabled=false 
 	
+
+
+func _on_boostactive_timeout() -> void:
+	boostvel=Vector2.ZERO
+	boost_state=2 
+	$boostcooldown.start()# Replace with function body.
+
+
+func _on_boostcooldown_timeout() -> void:
+	boost_state=0  # Replace with function body.
