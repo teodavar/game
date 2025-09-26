@@ -1,14 +1,15 @@
 extends Area2D
-#signal hit
+
 signal lives_changed(current_lives: int)
-signal died
+signal crash
+signal hit
+signal landing(current_lives: int, planet_id: String)
 @export var speed=400
 @export var max_lives: int = 3
 
 var lives: int = 0
 var invulnerable := false
 var screen_size
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -17,8 +18,6 @@ func _ready() -> void:
 	
 	hide()
 	screen_size= get_viewport_rect().size # Replace with function body.
-	
-	
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -43,31 +42,27 @@ func _process(delta: float) -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	# body: the object that hits the spaceship
-	if body.is_in_group("comet"):
-		_take_hit()
-		
 	print(body.get_name()) # prints the name of the class!
-	print("hello")
-	body.collision_with_spaceship()
+	body.collision_with_spacceship(self)
 	#print(position)
 	#position=position.clamp(position-Vector2(0,150),screen_size)
-	#position=position+Vector2(0,50) # recoil after hit <---- this one and the one below
-	#position=position.clamp(Vector2.ZERO,screen_size)
+
 	#print(position)
 	#hide()
 	#hit.emit()
 	#$CollisionShape2D.set_deferred("disabled",true)
 	
-func start(pos):
+func recoil():
+	position=position+Vector2(0,50) # recoil after hit
+	position=position.clamp(Vector2.ZERO,screen_size)
+	
+func	 start(pos):
 	position =pos
 	show()
 	$CollisionShape2D.disabled=false 
 	
-func haha():
-	show()
-	$CollisionShape2D.disabled=false 
-	
-func _take_hit() -> void:
+func got_hit():
+	recoil()
 	if invulnerable:
 		return
 		
@@ -76,7 +71,23 @@ func _take_hit() -> void:
 	print("lives Left: ", lives)
 		
 	if lives <= 0:
-		emit_signal("died")
+		crashed()
+	else:
+		#recoil()
+		hit.emit()
+func crashed():
+	recoil()
+	if invulnerable:
+		return
+	lives = 0
+	emit_signal("lives_changed", lives)
+	crash.emit()
 	
+func landed(planet_id):
+	landing.emit(lives,planet_id)
 
+	
+func haha():
+	show()
+	$CollisionShape2D.disabled=false 
 	

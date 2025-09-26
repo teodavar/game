@@ -1,12 +1,26 @@
-[gd_scene load_steps=2 format=3 uid="uid://cjtkl5x14a3f"]
+[gd_scene load_steps=3 format=3 uid="uid://jp5ejq7fv784"]
 
-[sub_resource type="GDScript" id="GDScript_dfiai"]
-script/source = "extends Control
-"
+[ext_resource type="Script" uid="uid://ccyyxu3jju605" path="res://scripts/hud.gd" id="1_37p78"]
+[ext_resource type="PackedScene" uid="uid://bs2nhdcxvrk3o" path="res://scene/lifecards.tscn" id="2_o8u2p"]
 
-[node name="HUD" type="Control"]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = SubResource("GDScript_dfiai")
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_37p78")
+
+[node name="LivesLabel" type="Label" parent="."]
+offset_left = 194.0
+offset_right = 341.0
+offset_bottom = 51.0
+text = "3"
+
+[node name="Cards" type="HBoxContainer" parent="."]
+offset_right = 144.0
+offset_bottom = 43.0
+
+[node name="Card1" parent="Cards" instance=ExtResource("2_o8u2p")]
+layout_mode = 2
+
+[node name="Card2" parent="Cards" instance=ExtResource("2_o8u2p")]
+layout_mode = 2
+
+[node name="Card3" parent="Cards" instance=ExtResource("2_o8u2p")]
+layout_mode = 2
