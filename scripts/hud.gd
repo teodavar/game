@@ -2,6 +2,7 @@ extends CanvasLayer
 #HUD only controls life display not life logic. removed death check and ending control.
 
 
+
 #@onready var lives_label: Label = $LivesLabel
 @onready var cards: Array[LifeCard] = [
 	$Cards/Card1 as LifeCard,
@@ -29,6 +30,7 @@ func _ready() -> void:
 func update_lives(current: int) -> void:
 	#lives_label.text = "Lives: %d" % current
 	print("!!!!!!!!!!!!!!!!")
+	
 	for i in range(cards.size()):
 		var should_show := i < current
 		var card := cards[i]
