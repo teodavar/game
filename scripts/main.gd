@@ -2,6 +2,11 @@ extends Node
 @export var comet_scene: PackedScene
 @export var asteroid_scene: PackedScene
 @export var field_scene: PackedScene
+
+# XX
+@onready var hud = $HUD
+@onready var ship = $Spaceship
+
 var score
 signal reset
 
@@ -9,6 +14,15 @@ signal reset
 func _ready() -> void:
 	new_game() # Replace with function body.
 
+	# Update HUD whenever lives change
+	ship.connect("lives_changed", Callable(hud, "_on_lives_changed"))
+	 # Show game over when ship dies
+	ship.connect("died", Callable(self, "_on_ship_died"))
+	hud.update_lives(ship.lives)
+	#hud.init_lives(ship.lives)
+	
+	# Initialize HUD text
+	hud.update_lives(ship.lives)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -27,10 +41,11 @@ func new_game():
 	print("begin")
 	add_child(field_scene.instantiate().init(comet_scene,$CometPath,3*PI/4,200,0.5,0,0,3))
 	add_child(field_scene.instantiate().init(asteroid_scene,$CometPath,3*PI/4,100,1,0,0,1))
-func _on_spaceship_hit() -> void:
+
+#func _on_spaceship_hit() -> void:
 	#print("11111111")
 	#reset.emit()
-	score=0
+	#score=0
 	#$Spaceship.haha()
 	#$Spaceship.start($StartPosition.position) 
 	#get_tree().call_group("comets2", "queue_free")
@@ -56,8 +71,13 @@ func _on_score_timer_timeout() -> void:
 
 
 func _on_start_timer_timeout() -> void:
-	#$CometTimer.start()
+	$CometTimer.start()
 	$ScoreTimer.start()
+
+func _on_ship_died() -> void:
+	hud.show_game_over()
+	ship.set_process(false)
+	ship.set_physics_process(false)
 	
-	
-	 # Replace with function body.
+func _on_lives_changed(current: int) -> void:
+	hud.update_lives(current)
