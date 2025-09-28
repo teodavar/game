@@ -9,6 +9,7 @@ extends Node2D
 @export var startp=Vector2(0,0)
 @export var pathex: Path2D
 @export var N=1
+@export var variance=Vector2(0,0)
 var path
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -24,7 +25,7 @@ func _ready() -> void:
 	else:
 		firefirst()
 
-func init(objectsci,pathi,directioni=PI/2,speedi=100,refirei=0,durationi=0,starti=0,Ni=1):
+func init(objectsci,pathi,directioni=PI/2,speedi=100,refirei=0,durationi=0,starti=0,Ni=1,Var=Vector2(0,0)):
 	objectsc=objectsci
 	print("new ojects")
 	N=Ni
@@ -35,6 +36,7 @@ func init(objectsci,pathi,directioni=PI/2,speedi=100,refirei=0,durationi=0,start
 	path=pathi
 	refire_speed=refirei
 	startime=starti
+	variance=Var
 	if (refirei!=0):
 		refire=true
 		$refire.wait_time=refire_speed
@@ -52,13 +54,17 @@ func fire():
 		#var spawn_spawn_location = $CometPath/CometSpawn
 		#comet_spawn_location.progress_ratio = randf()
 		#comet.position= comet_spawn_location.position
+		var random_x = randf_range(-1, 1)
+		var random_y = randf_range(-1, 1)
+		var random_vector = Vector2(random_x, random_y)
 		if (path is Vector2):
-			object.position = path
+			object.position = path+random_vector*variance
 		elif (path is Path2D):
 			var follow=PathFollow2D.new()
 			path.add_child(follow)
 			follow.progress_ratio = randf()
-			object.position= follow.position
+			#print(follow)
+			object.position= follow.position #+random_vector*variance
 		#print(object.position)
 		#comet.position=Vector2(640, 600)# Replace with function body.
 		object.rotation= direction

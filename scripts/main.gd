@@ -35,9 +35,12 @@ func new_game():
 	$Spaceship.start($StartPosition.position)
 	$StartTimer.start()
 	print("begin")
-	add_child(field_scene.instantiate().init(comet_scene,$CometPath,3*PI/4,200,0.4,0,0,3))
-	add_child(field_scene.instantiate().init(asteroid_scene,$spawnpath,0,100,6,0,6,1))
-	add_child(field_scene.instantiate().init(asteroid_scene,$sp3,PI,50,0,0,18,1))
+	$tutorial.play()
+	await get_tree().create_timer(65).timeout
+	$intro_level.play()
+	#add_child(field_scene.instantiate().init(comet_scene,$CometPath,3*PI/4,200,0.4,0,0,3))
+	#add_child(field_scene.instantiate().init(asteroid_scene,$spawnpath,0,100,6,0,6,1))
+	#add_child(field_scene.instantiate().init(asteroid_scene,$sp3,PI,50,0,0,18,1))
 
 #func _on_spaceship_hit() -> void:
 	#print("11111111")
