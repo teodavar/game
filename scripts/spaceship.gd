@@ -16,7 +16,9 @@ var boostvel=Vector2.ZERO
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	self.z_index=-3
 	$AnimatedSprite2D.animation="fly"
+	$AnimatedSprite2D/shield.animation="off2"
 	lives = max_lives
 	emit_signal("lives_changed", lives)
 	
@@ -78,7 +80,7 @@ func recoil():
 	position=position.clamp(Vector2.ZERO,screen_size)
 	await get_tree().create_timer(0.3).timeout
 	invulnerable=false
-	$AnimatedSprite2D/shield.animation="off"
+	$AnimatedSprite2D/shield.animation="off2"
 	$AnimatedSprite2D.play()
 	
 	

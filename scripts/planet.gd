@@ -1,12 +1,19 @@
 extends RigidBody2D
-@export var id: String
+@export var id="null"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	self.z_index=-10
-	var comet_types =Array($AnimatedSprite2D.sprite_frames.get_animation_names())
-	$AnimatedSprite2D.animation=comet_types[0]
+	setplanet(id)
 	$AnimatedSprite2D.play() # Replace with function body.
+
+func setplanet(name):
+	if name == "null":
+		var comet_types =Array($AnimatedSprite2D.sprite_frames.get_animation_names())
+		id=comet_types.pick_random()
+	else:
+		id=name
+	$AnimatedSprite2D.animation=id
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

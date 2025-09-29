@@ -16,11 +16,13 @@ func _process(delta: float) -> void:
 	pass
 func play():
 	print("begin tutorial")
+	var saturn=planet_scene.instantiate()
+	saturn.setplanet("saturn")
 	add_child(field_scene.instantiate().init(comet_scene,$up,PI/2,100,1,4,2,1))
 	add_child(field_scene.instantiate().init(comet_scene,$left,PI/8,100,1,8,8,1))
 	add_child(field_scene.instantiate().init(comet_scene,$right,PI,200,0.5,8,22,1))
 	add_child(field_scene.instantiate().init(asteroid_scene,Vector2(500+screen_size.x,screen_size.y/3),PI,75,8,30,20,1,Vector2(0,400)))
-	add_child(field_scene.instantiate().init(planet_scene,Vector2(50,-screen_size.y/2),PI/2,25,0,0,25,1,Vector2(100,0)))
+	add_child(field_scene.instantiate().init(saturn,Vector2(50,-screen_size.y),PI/2,25,0,0,1,1,Vector2(100,0)))
 	add_child(field_scene.instantiate().init(comet_scene,$up,PI/2,300,0.5,8,32,3))
 	add_child(field_scene.instantiate().init(comet_scene,Vector2.ZERO,PI/4,300,0.5,8,38,4,Vector2(300,0)))
 	add_child(field_scene.instantiate().init(comet_scene,Vector2(screen_size.x/2,0),PI-PI/4,300,0.5,8,50,4,Vector2(1000,0)))

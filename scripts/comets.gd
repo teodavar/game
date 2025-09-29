@@ -3,6 +3,7 @@ extends RigidBody2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	self.z_index=-2
 	var comet_types =Array($AnimatedSprite2D.sprite_frames.get_animation_names())
 	#print(comet_types)
 	$AnimatedSprite2D.animation="fall"

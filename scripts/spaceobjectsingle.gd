@@ -10,6 +10,8 @@ extends Node2D
 @export var pathex: Path2D
 @export var N=1
 @export var variance=Vector2(0,0)
+var particular = false
+var objectp
 var path
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -26,18 +28,24 @@ func _ready() -> void:
 		firefirst()
 
 func init(objectsci,pathi,directioni=PI/2,speedi=100,refirei=0,durationi=0,starti=0,Ni=1,Var=Vector2(0,0)):
-	objectsc=objectsci
-	#print("new ojects")
-	N=Ni
-	#startp=startpi
-	duration=durationi
+	if objectsci is not PackedScene:
+		objectp = objectsci
+		particular = true
+		N=1
+		refire_speed=0
+		duration=0
+	else:
+		objectsc=objectsci
+		refire_speed=refirei
+		N=Ni
+		duration=durationi
 	direction=directioni
 	speed=speedi
 	path=pathi
-	refire_speed=refirei
+	
 	startime=starti
 	variance=Var
-	if (refirei!=0):
+	if (refire_speed!=0):
 		refire=true
 		$refire.wait_time=refire_speed
 	else:
@@ -49,8 +57,13 @@ func _process(delta: float) -> void:
 	pass
 
 func fire():
+	
 	for i in range(0,N):
-		var object=objectsc.instantiate()
+		var object
+		if particular == true:
+			object=objectp
+		else:
+			object=objectsc.instantiate()
 		#var spawn_spawn_location = $CometPath/CometSpawn
 		#comet_spawn_location.progress_ratio = randf()
 		#comet.position= comet_spawn_location.position
@@ -72,7 +85,11 @@ func fire():
 		object.reshape(scale)
 		var velocity=Vector2(randf_range(speed*0.5,speed*2 ),0)
 		object.linear_velocity = velocity.rotated(direction)
-		add_child(object)
+		if object.is_inside_tree():
+			print("given planet")
+			object.show()
+		else:
+			add_child(object)
 		
 func firefirst():
 	fire()
