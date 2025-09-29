@@ -2,6 +2,8 @@ extends Node
 @export var comet_scene: PackedScene
 @export var asteroid_scene: PackedScene
 @export var field_scene: PackedScene
+@export var planet_scene= load("res://scene/planet.tscn")
+
 
 # XX
 @onready var hud = $HUD
@@ -9,9 +11,9 @@ extends Node
 
 var score
 signal reset
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	$TextureRect.z_index=-11
 	new_game() # Replace with function body.
 
 

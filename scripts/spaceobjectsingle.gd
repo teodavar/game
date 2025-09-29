@@ -27,7 +27,7 @@ func _ready() -> void:
 
 func init(objectsci,pathi,directioni=PI/2,speedi=100,refirei=0,durationi=0,starti=0,Ni=1,Var=Vector2(0,0)):
 	objectsc=objectsci
-	print("new ojects")
+	#print("new ojects")
 	N=Ni
 	#startp=startpi
 	duration=durationi
@@ -78,7 +78,7 @@ func firefirst():
 	fire()
 	
 	$StartTimer.stop()
-	print("refire ",refire)
+	#print("refire ",refire)
 	if refire==true:
 		$refire.start()
 		#print("$duration.wait_time",$duration.wait_time)
@@ -95,5 +95,5 @@ func _on_refire_timeout() -> void:
 
 func _on_duration_timeout() -> void:
 	$refire.stop()
-	print("stop fire")
+	#print("stop fire")
 	$duration.stop() # Replace with function body.

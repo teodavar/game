@@ -4,7 +4,8 @@ extends RigidBody2D
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var comet_types =Array($AnimatedSprite2D.sprite_frames.get_animation_names())
-	$AnimatedSprite2D.animation=comet_types[0]
+	#print(comet_types)
+	$AnimatedSprite2D.animation="fall"
 	$AnimatedSprite2D.play()
 	 # Replace with function body.
 func reshape(scale):
@@ -23,13 +24,19 @@ func collision_with_spacceship(ship) -> void:
 	
 	print("hit")
 	ship.got_hit()
-	hide()
+	explode()
+	
+
+func explode():
+	self.linear_velocity=Vector2.ZERO
+	$CollisionShape2D.set_deferred("disabled",true)
+	$AnimatedSprite2D.animation="explode"
+	await get_tree().create_timer(0.1).timeout
+	print("commet exploded")
 	queue_free()
-
-
 func _on_body_entered(body: Node) -> void:
 	if body is RigidBody2D:
 		print("asteroid blocked comet")
 		#var collision_normal = (global_position - body.global_position).normalized()
 		#body.apply_central_impulse(collision_normal * 500) # Adjust force as needed
-		queue_free() # Replace with function body.
+		explode() # Replace with function body.

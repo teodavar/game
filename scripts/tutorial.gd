@@ -1,7 +1,9 @@
 extends Node2D
-@export var comet_scene= load("res://scripts/comets.gd")
-@export var asteroid_scene= load("res://scripts/asteroid.gd")
-@export var field_scene= load("res://scripts/spaceobjectsingle.gd")
+@export var comet_scene= load("res://scene/comets.tscn")
+@export var asteroid_scene= load("res://scene/asteroid.tscn")
+@export var field_scene= load("res://scene/spaceobjectsingle.tscn")
+@export var planet_scene= load("res://scene/planet.tscn")
+#https://nineplanets.org/planets-transparent-background/
 var screen_size=Vector2.ZERO
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -17,6 +19,8 @@ func play():
 	add_child(field_scene.instantiate().init(comet_scene,$up,PI/2,100,1,4,2,1))
 	add_child(field_scene.instantiate().init(comet_scene,$left,PI/8,100,1,8,8,1))
 	add_child(field_scene.instantiate().init(comet_scene,$right,PI,200,0.5,8,22,1))
+	add_child(field_scene.instantiate().init(asteroid_scene,Vector2(500+screen_size.x,screen_size.y/3),PI,75,8,30,20,1,Vector2(0,400)))
+	add_child(field_scene.instantiate().init(planet_scene,Vector2(50,-screen_size.y/2),PI/2,25,0,0,25,1,Vector2(100,0)))
 	add_child(field_scene.instantiate().init(comet_scene,$up,PI/2,300,0.5,8,32,3))
 	add_child(field_scene.instantiate().init(comet_scene,Vector2.ZERO,PI/4,300,0.5,8,38,4,Vector2(300,0)))
 	add_child(field_scene.instantiate().init(comet_scene,Vector2(screen_size.x/2,0),PI-PI/4,300,0.5,8,50,4,Vector2(1000,0)))

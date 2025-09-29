@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://d1kphst6t2fxc"]
+[gd_scene load_steps=6 format=3 uid="uid://d1kphst6t2fxc"]
 
 [ext_resource type="Script" uid="uid://ckcimn22h2maf" path="res://scripts/spaceship.gd" id="1_dl81w"]
 [ext_resource type="Texture2D" uid="uid://dbpblxkii4s0v" path="res://assets/spaceship.transparent.png" id="2_2oxxg"]
+[ext_resource type="Texture2D" uid="uid://0gkddfxdx2gv" path="res://assets/17-174279_energy-shield-png-energy-shield-transparent.png" id="3_0igau"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_c0nl8"]
 animations = [{
@@ -13,9 +14,20 @@ animations = [{
 "name": &"fly",
 "speed": 5.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_2oxxg")
+}],
 "loop": true,
-"name": &"fly2",
+"name": &"off",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_0igau")
+}],
+"loop": true,
+"name": &"on",
 "speed": 5.0
 }]
 
@@ -30,6 +42,11 @@ script = ExtResource("1_dl81w")
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_c0nl8")
+animation = &"fly"
+
+[node name="shield" type="AnimatedSprite2D" parent="AnimatedSprite2D"]
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_c0nl8")
 animation = &"fly"

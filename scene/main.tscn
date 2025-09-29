@@ -31,6 +31,7 @@ offset_right = 1311.0
 offset_bottom = 744.0
 texture = ExtResource("4_lquwl")
 expand_mode = 1
+flip_h = true
 
 [node name="Spaceship" parent="." instance=ExtResource("1_ig7tw")]
 position = Vector2(181, 95)

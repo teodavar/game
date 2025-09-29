@@ -11,11 +11,12 @@ var boost_state=0 #0 = ready, 1=active, 2=cooldown
 var lives: int = 0
 var invulnerable := false
 var screen_size
-
+#https://www.seekpng.com/ima/u2q8a9i1r5r5e6a9/
 var boostvel=Vector2.ZERO
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	$AnimatedSprite2D.animation="fly"
 	lives = max_lives
 	emit_signal("lives_changed", lives)
 	
@@ -59,7 +60,7 @@ func boost(velocity):
 	
 func _on_body_entered(body: Node2D) -> void:
 	# body: the object that hits the spaceship
-	print(body.get_name()) # prints the name of the class!
+	#print(body.get_name()) # prints the name of the class!
 	body.collision_with_spacceship(self)
 	#print(position)
 	#position=position.clamp(position-Vector2(0,150),screen_size)
@@ -70,8 +71,16 @@ func _on_body_entered(body: Node2D) -> void:
 	#$CollisionShape2D.set_deferred("disabled",true)
 	
 func recoil():
-	position=position+Vector2(0,50) # recoil after hit
+	$AnimatedSprite2D/shield.animation="on"
+	$AnimatedSprite2D.play()
+	invulnerable=true
+	position=position+Vector2(0,5) # recoil after hit
 	position=position.clamp(Vector2.ZERO,screen_size)
+	await get_tree().create_timer(0.3).timeout
+	invulnerable=false
+	$AnimatedSprite2D/shield.animation="off"
+	$AnimatedSprite2D.play()
+	
 	
 func	 start(pos):
 	position =pos
@@ -79,10 +88,11 @@ func	 start(pos):
 	$CollisionShape2D.disabled=false 
 	
 func got_hit():
-	recoil()
+	
 	if invulnerable:
+		print("shield block")
 		return
-		
+	
 	lives -= 1
 	emit_signal("lives_changed", lives)
 	print("lives Left: ", lives)
@@ -92,9 +102,12 @@ func got_hit():
 	else:
 		#recoil()
 		hit.emit()
-func crashed():
 	recoil()
+	
+func crashed():
+	
 	if invulnerable:
+		print("shield block")
 		return
 	lives = 0
 	emit_signal("lives_changed", lives)
@@ -102,6 +115,7 @@ func crashed():
 	
 func landed(planet_id):
 	landing.emit(lives,planet_id)
+	print("landing on ",planet_id,"with ",lives,"lives")
 
 	
 func haha():
