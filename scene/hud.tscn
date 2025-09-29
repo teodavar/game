@@ -1,12 +1,13 @@
 [gd_scene load_steps=3 format=3 uid="uid://jp5ejq7fv784"]
 
 [ext_resource type="Script" uid="uid://ccyyxu3jju605" path="res://scripts/hud.gd" id="1_37p78"]
-[ext_resource type="PackedScene" uid="uid://bs2nhdcxvrk3o" path="res://scene/lifecards.tscn" id="2_o8u2p"]
+[ext_resource type="PackedScene" uid="uid://bs2nhdcxvrk3o" path="res://scene/LifeCards.tscn" id="2_o8u2p"]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_37p78")
 
 [node name="LivesLabel" type="Label" parent="."]
+visible = false
 offset_left = 194.0
 offset_right = 341.0
 offset_bottom = 51.0
@@ -15,6 +16,7 @@ text = "3"
 [node name="Cards" type="HBoxContainer" parent="."]
 offset_right = 144.0
 offset_bottom = 43.0
+theme_override_constants/separation = 100
 
 [node name="Card1" parent="Cards" instance=ExtResource("2_o8u2p")]
 layout_mode = 2
