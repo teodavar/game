@@ -24,6 +24,7 @@ var current_velocity=Vector2.ZERO
 
 @onready var anim: AnimationPlayer = $AnimationPlayer
 var has_landed := false
+var planet_landed_on 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -32,8 +33,6 @@ func _ready() -> void:
 	$AnimatedSprite2D/shield.animation="off"
 	lives = max_lives
 	emit_signal("lives_changed", lives)
-	connect("body_entered", Callable(self, "_on_body_entered"))
-	
 	hide()
 	screen_size= get_viewport_rect().size # Replace with function body.
 
@@ -83,13 +82,19 @@ func control_intertia(delta):
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	var newp
-	if inertia:
-		newp=control_intertia(delta)
+	if has_landed:
+		var velocity =planet_landed_on.position-position
+		velocity=velocity.normalized() *speed/2
+		position+=velocity*delta
+		position=position.clamp(Vector2.ZERO,screen_size)
 	else:
-		newp=controls_simple(delta)
-	position+=newp
-	position=position.clamp(Vector2.ZERO,screen_size)
+		var newp
+		if inertia:
+			newp=control_intertia(delta)
+		else:
+			newp=controls_simple(delta)
+		position+=newp
+		position=position.clamp(Vector2.ZERO,screen_size)
 
 func boost(velocity):
 	if boost_state==0:
@@ -107,9 +112,6 @@ func boost(velocity):
 	
 func _on_body_entered(body: Node2D) -> void:
 	
-	if body.is_in_group("planet"):
-		_land_on_planet()
-		return
 	
 	# body: the object that hits the spaceship
 	#print(body.get_name()) # prints the name of the class!
@@ -120,21 +122,7 @@ func _on_body_entered(body: Node2D) -> void:
 	#print(position)
 	#hide()
 	#hit.emit()
-	#$CollisionShape2D.set_deferred("disabled",true)
-
-func _land_on_planet() -> void:
-	if has_landed:
-		return
-	has_landed = true
-	
-	#freeze control while anim plays
-	set_process(false)
-	set_physics_process(false)
-	
-	anim.play("planet_bump")
-	await  anim.animation_finished
-	
-	emit_signal("land")
+	#$CollisionShape2D.set_deferred("disabled",true)	
 	
 	
 func recoil():
@@ -184,7 +172,19 @@ func crashed():
 	
 	
 	
-func landed(planet_id):
+func landed(planet_id,planet):
+	planet_landed_on=planet
+	if has_landed:
+		return
+	has_landed = true
+	
+	#freeze control while anim plays
+	#set_process(false)
+	set_physics_process(false)
+	
+	anim.play("planet_bump")
+	await  anim.animation_finished
+	
 	landing.emit(lives,planet_id)
 	print("landing on ",planet_id,"with ",lives,"lives")
 

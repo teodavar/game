@@ -50,7 +50,7 @@ func generate_field(centre,length):
 		new_path2d.curve = new_curve
 		add_child(new_path2d)
 		newp=new_path2d
-	add_child(field_scene.instantiate().init(comet_scene,newp,PI/4,100,0.1,8,0,3))
+	#add_child(field_scene.instantiate().init(comet_scene,newp,PI/4,100,0.1,8,0,3))
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass

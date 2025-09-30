@@ -29,6 +29,6 @@ func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 
 func collision_with_spacceship(ship) -> void:
 	print("landing")
-	ship.landed(id)
+	ship.landed(id,self)
 	#hide()
 	#queue_free()
