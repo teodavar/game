@@ -32,7 +32,7 @@ func explode():
 	self.linear_velocity=Vector2.ZERO
 	$CollisionShape2D.set_deferred("disabled",true)
 	$AnimatedSprite2D.animation="explode"
-	#await get_tree().create_timer(0.1).timeout
+	await get_tree().create_timer(0.1).timeout
 	print("commet exploded")
 	queue_free()
 func _on_body_entered(body: Node) -> void:

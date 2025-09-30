@@ -18,7 +18,7 @@ var boostvel=Vector2.ZERO
 func _ready() -> void:
 	self.z_index=-3
 	$AnimatedSprite2D.animation="fly"
-	$AnimatedSprite2D/shield.animation="off2"
+	$AnimatedSprite2D/shield.animation="off"
 	lives = max_lives
 	emit_signal("lives_changed", lives)
 	
@@ -76,11 +76,12 @@ func recoil():
 	$AnimatedSprite2D/shield.animation="on"
 	$AnimatedSprite2D.play()
 	invulnerable=true
+	print("recoil!!!!!")
 	position=position+Vector2(0,5) # recoil after hit
 	position=position.clamp(Vector2.ZERO,screen_size)
-	#await get_tree().create_timer(0.3).timeout
+	await get_tree().create_timer(0.3).timeout
 	invulnerable=false
-	$AnimatedSprite2D/shield.animation="off2"
+	$AnimatedSprite2D/shield.animation="off"
 	$AnimatedSprite2D.play()
 	
 	
@@ -115,8 +116,6 @@ func crashed():
 	lives = 0
 	emit_signal("lives_changed", lives)
 	crash.emit()
-	queue_free()
-	get_tree().change_scene_to_file("res://scene/game_over.tscn")
 	
 	
 	

@@ -67,6 +67,7 @@ func _on_start_timer_timeout() -> void:
 
 
 func _on_spaceship_crash() -> void:
+	get_tree().call_deferred("change_scene_to_file","res://scene/game_over.tscn")
 	print("death") # Replace with function body.
 
 
