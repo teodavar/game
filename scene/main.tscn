@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://de8pbjay47e46"]
+[gd_scene load_steps=12 format=3 uid="uid://de8pbjay47e46"]
 
 [ext_resource type="Script" uid="uid://b4fout3yjkh4" path="res://scripts/main.gd" id="1_h2yge"]
 [ext_resource type="PackedScene" uid="uid://d1kphst6t2fxc" path="res://scene/spaceship.tscn" id="1_ig7tw"]
@@ -7,28 +7,15 @@
 [ext_resource type="Shader" uid="uid://dr4s25b4smy33" path="res://assets/scroll_background.gdshader" id="3_lquwl"]
 [ext_resource type="PackedScene" uid="uid://dcdkapui08olm" path="res://scene/spaceobjectsingle.tscn" id="4_p1hux"]
 [ext_resource type="PackedScene" uid="uid://jp5ejq7fv784" path="res://scene/hud.tscn" id="5_of57s"]
+
 [ext_resource type="Texture2D" uid="uid://dk2xavhi2mm76" path="res://assets/Textures/SpaceBackground_Suerza_2.png" id="7_of57s"]
+
+[ext_resource type="PackedScene" uid="uid://cbljwt6dwmcqm" path="res://scene/intro_level.tscn" id="9_b5f6u"]
+[ext_resource type="PackedScene" uid="uid://debvso3hb33tj" path="res://scene/tutorial.tscn" id="10_tqoya"]
+
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_272bh"]
 shader = ExtResource("3_lquwl")
-
-[sub_resource type="Curve2D" id="Curve2D_ig7tw"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 32, -43, 0, 0, 0, 0, 1306, -37, 0, 0, 0, 0, 1314, 692)
-}
-point_count = 3
-
-[sub_resource type="Curve2D" id="Curve2D_p1hux"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, -36, 91, 0, 0, 0, 0, -46, 458)
-}
-point_count = 2
-
-[sub_resource type="Curve2D" id="Curve2D_b5f6u"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 1380, 137, 0, 0, 0, 0, 1387, 597)
-}
-point_count = 2
 
 [node name="Main" type="Node"]
 script = ExtResource("1_h2yge")
@@ -49,6 +36,7 @@ offset_right = 1311.0
 offset_bottom = 744.0
 texture = ExtResource("7_of57s")
 expand_mode = 1
+flip_h = true
 
 [node name="Spaceship" parent="." instance=ExtResource("1_ig7tw")]
 position = Vector2(181, 95)
@@ -62,14 +50,9 @@ one_shot = true
 [node name="StartPosition" type="Marker2D" parent="."]
 position = Vector2(661, 516)
 
-[node name="CometPath" type="Path2D" parent="."]
-curve = SubResource("Curve2D_ig7tw")
+[node name="intro_level" parent="." instance=ExtResource("9_b5f6u")]
 
-[node name="spawnpath" type="Path2D" parent="."]
-curve = SubResource("Curve2D_p1hux")
-
-[node name="sp3" type="Path2D" parent="."]
-curve = SubResource("Curve2D_b5f6u")
+[node name="tutorial" parent="." instance=ExtResource("10_tqoya")]
 
 [connection signal="crash" from="Spaceship" to="." method="_on_spaceship_crash"]
 [connection signal="landing" from="Spaceship" to="." method="_on_spaceship_landing"]

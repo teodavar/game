@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://3r8r1yvx0vc0"]
+[gd_scene load_steps=8 format=3 uid="uid://3r8r1yvx0vc0"]
 
 [ext_resource type="Script" uid="uid://bu8mv4ymhucf1" path="res://scripts/asteroid.gd" id="1_gktfr"]
 [ext_resource type="Texture2D" uid="uid://bovqhv7g28usp" path="res://assets/Textures/a_1.t.png" id="2_gktfr"]
 [ext_resource type="Texture2D" uid="uid://cip4txmnbstc0" path="res://assets/Textures/a_3.t.png" id="2_xkyx0"]
+[ext_resource type="Texture2D" uid="uid://cbr44x2hefba5" path="res://assets/Textures/a_2.t.png" id="4_xkyx0"]
+[ext_resource type="Texture2D" uid="uid://411ek21cqfgo" path="res://assets/asteroid.png" id="5_uo68c"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_squbt"]
 animations = [{
@@ -21,33 +23,50 @@ animations = [{
 "loop": true,
 "name": &"fall2",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_xkyx0")
+}],
+"loop": true,
+"name": &"fall3",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_uo68c")
+}],
+"loop": true,
+"name": &"fall4",
+"speed": 5.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_uo68c"]
-radius = 40.388428
-height = 161.98264
+radius = 57.140064
+height = 233.32208
 
 [node name="asteroid" type="RigidBody2D" groups=["comets2"]]
-collision_layer = 2
+collision_layer = 4
+collision_mask = 3
+mass = 1000.0
 gravity_scale = 0.0
+inertia = 1000.0
 script = ExtResource("1_gktfr")
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(-1.5258789e-05, 0)
-rotation = 1.5027285
-scale = Vector2(0.4, 0.56)
+scale = Vector2(0.5999167, 0.5)
 sprite_frames = SubResource("SpriteFrames_squbt")
-animation = &"fall"
+animation = &"fall4"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(26, 1)
-rotation = 1.5027285
+rotation = -1.5707964
 shape = SubResource("CapsuleShape2D_uo68c")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2(14, 2)
-rotation = 1.5027285
-rect = Rect2(-54.853428, -100.919876, 113.49154, 216.92984)
+rotation = -1.5707964
+rect = Rect2(-77.66095, -129.29022, 161.88797, 235.28712)
 
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

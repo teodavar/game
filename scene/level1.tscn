@@ -1,0 +1,39 @@
+[gd_scene load_steps=8 format=3 uid="uid://d1an7vgpqxga5"]
+
+[ext_resource type="Script" uid="uid://vsurclrt8ra6" path="res://scripts/tutorial.gd" id="1_0a4uc"]
+[ext_resource type="PackedScene" uid="uid://dp48tk7ctl8s2" path="res://scene/comets.tscn" id="2_nk78g"]
+[ext_resource type="PackedScene" uid="uid://3r8r1yvx0vc0" path="res://scene/asteroid.tscn" id="3_a215g"]
+[ext_resource type="PackedScene" uid="uid://dcdkapui08olm" path="res://scene/spaceobjectsingle.tscn" id="4_ebr37"]
+
+[sub_resource type="Curve2D" id="Curve2D_epgyv"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 533, -73, 0, 0, 0, 0, 793, -69)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_hegci"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -54, 365, 0, 0, 0, 0, -30, 196, 0, 0, 0, 0, -17, 39)
+}
+point_count = 3
+
+[sub_resource type="Curve2D" id="Curve2D_h8sj1"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1363, 193, 0, 0, 0, 0, 1389, 384)
+}
+point_count = 2
+
+[node name="tutorial" type="Node2D"]
+script = ExtResource("1_0a4uc")
+comet_scene = ExtResource("2_nk78g")
+asteroid_scene = ExtResource("3_a215g")
+field_scene = ExtResource("4_ebr37")
+
+[node name="up" type="Path2D" parent="."]
+curve = SubResource("Curve2D_epgyv")
+
+[node name="left" type="Path2D" parent="."]
+curve = SubResource("Curve2D_hegci")
+
+[node name="right" type="Path2D" parent="."]
+curve = SubResource("Curve2D_h8sj1")

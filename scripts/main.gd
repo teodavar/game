@@ -2,6 +2,8 @@ extends Node
 @export var comet_scene: PackedScene
 @export var asteroid_scene: PackedScene
 @export var field_scene: PackedScene
+@export var planet_scene= load("res://scene/planet.tscn")
+
 
 # XX
 @onready var hud = $HUD
@@ -9,9 +11,9 @@ extends Node
 
 var score
 signal reset
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	$TextureRect.z_index=-11
 	new_game() # Replace with function body.
 
 
@@ -35,9 +37,12 @@ func new_game():
 	$Spaceship.start($StartPosition.position)
 	$StartTimer.start()
 	print("begin")
-	add_child(field_scene.instantiate().init(comet_scene,$CometPath,3*PI/4,200,0.5,4,0,3))
-	add_child(field_scene.instantiate().init(asteroid_scene,$spawnpath,0,100,1,4,8,1))
-	add_child(field_scene.instantiate().init(asteroid_scene,$sp3,PI,50,0,0,18,1))
+	$tutorial.play()
+	await get_tree().create_timer(65).timeout
+	$intro_level.play()
+	#add_child(field_scene.instantiate().init(comet_scene,$CometPath,3*PI/4,200,0.4,0,0,3))
+	#add_child(field_scene.instantiate().init(asteroid_scene,$spawnpath,0,100,6,0,6,1))
+	#add_child(field_scene.instantiate().init(asteroid_scene,$sp3,PI,50,0,0,18,1))
 
 #func _on_spaceship_hit() -> void:
 	#print("11111111")
