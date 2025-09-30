@@ -47,6 +47,7 @@ points = PackedVector2Array(0, -58.75, -6.1538463, -16.25, -13.846154, -6.25, -1
 position = Vector2(0, 3)
 collision_mask = 15
 script = ExtResource("1_dl81w")
+inertia = true
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

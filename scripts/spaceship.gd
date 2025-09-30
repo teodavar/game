@@ -5,14 +5,18 @@ signal crash
 signal hit
 signal landing(current_lives: int, planet_id: String)
 @export var speed=400
+@export var max_speed=500
+@export var impulse=1000
 @export var boostspeed=2
 @export var max_lives: int = 3
+@export var inertia=false
 var boost_state=0 #0 = ready, 1=active, 2=cooldown
 var lives: int = 0
 var invulnerable := false
 var screen_size
 #https://www.seekpng.com/ima/u2q8a9i1r5r5e6a9/
 var boostvel=Vector2.ZERO
+var current_velocity=Vector2.ZERO
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -26,8 +30,7 @@ func _ready() -> void:
 	screen_size= get_viewport_rect().size # Replace with function body.
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func controls_simple(delta):
 	var velocity =Vector2.ZERO
 	if Input.is_action_pressed("move_down"):
 		velocity.y+=1
@@ -43,7 +46,39 @@ func _process(delta: float) -> void:
 	else:
 		$AnimatedSprite2D.stop()
 	velocity+=boost(velocity)
-	position+=velocity*delta
+	return velocity*delta
+	
+func control_intertia(delta):
+	var acccel =Vector2.ZERO
+	if Input.is_action_pressed("move_down"):
+		acccel.y+=1
+	if Input.is_action_pressed("move_up"):
+		acccel.y-=1
+	if Input.is_action_pressed("move_left"):
+		acccel.x-=1
+	if Input.is_action_pressed("move_right"):
+		acccel.x+=1
+	if acccel.length() > 0:
+		acccel=acccel.normalized() *impulse
+		$AnimatedSprite2D.play()
+	else:
+		$AnimatedSprite2D.stop()
+	if (current_velocity.normalized()).dot(acccel.normalized())<0:
+		acccel*=2
+	current_velocity+=acccel*delta
+	if current_velocity.length() > max_speed:
+		current_velocity = current_velocity.normalized() * max_speed
+	current_velocity = boost(acccel)/3+current_velocity
+	return current_velocity*delta
+	
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	var newp
+	if inertia:
+		newp=control_intertia(delta)
+	else:
+		newp=controls_simple(delta)
+	position+=newp
 	position=position.clamp(Vector2.ZERO,screen_size)
 
 func boost(velocity):
