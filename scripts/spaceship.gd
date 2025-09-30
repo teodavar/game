@@ -9,7 +9,9 @@ signal landing(current_lives: int, planet_id: String)
 @export var impulse=1000
 @export var boostspeed=2
 @export var max_lives: int = 3
+@export var break_acce_mult= 3
 @export var inertia=false
+@export var auto_break_mult=0.0
 var boost_state=0 #0 = ready, 1=active, 2=cooldown
 var lives: int = 0
 var invulnerable := false
@@ -62,9 +64,10 @@ func control_intertia(delta):
 		acccel=acccel.normalized() *impulse
 		$AnimatedSprite2D.play()
 	else:
+		current_velocity*=(1-auto_break_mult)
 		$AnimatedSprite2D.stop()
 	if (current_velocity.normalized()).dot(acccel.normalized())<0:
-		acccel*=2
+		acccel*=break_acce_mult
 	current_velocity+=acccel*delta
 	if current_velocity.length() > max_speed:
 		current_velocity = current_velocity.normalized() * max_speed
