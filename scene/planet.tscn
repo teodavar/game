@@ -53,7 +53,7 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_u71er"]
 radius = 157.38487
 
-[node name="planet" type="RigidBody2D" groups=["comets2"]]
+[node name="planet" type="RigidBody2D" groups=["comets2", "planet"]]
 collision_layer = 8
 mass = 1000.0
 gravity_scale = 0.0

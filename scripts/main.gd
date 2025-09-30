@@ -14,6 +14,7 @@ signal reset
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$TextureRect.z_index=-11
+	ship.connect("land", Callable(self, "_on_ship_landed"))
 	new_game() # Replace with function body.
 
 
@@ -21,7 +22,7 @@ func _ready() -> void:
 	
 	# Initialize HUD text
 
-
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
@@ -30,7 +31,6 @@ func game_over():
 	$ScoreTimer.stop()
 	$MobTimer.stop()
 	#reset.emit()
-	
 	
 func new_game():
 	score=0
@@ -53,18 +53,11 @@ func new_game():
 	#get_tree().call_group("comets2", "queue_free")
 
 
-
-	
-	
 func _on_score_timer_timeout() -> void:
 	score+=1 # Replace with function body.
 
-
 func _on_start_timer_timeout() -> void:
 	$ScoreTimer.start()
-
-	
-
 
 func _on_spaceship_crash() -> void:
 	get_tree().call_deferred("change_scene_to_file","res://scene/game_over.tscn")

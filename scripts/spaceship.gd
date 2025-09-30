@@ -4,6 +4,7 @@ signal lives_changed(current_lives: int)
 signal crash
 signal hit
 signal landing(current_lives: int, planet_id: String)
+signal land
 @export var speed=400
 @export var max_speed=500
 @export var impulse=1000
@@ -13,12 +14,15 @@ signal landing(current_lives: int, planet_id: String)
 @export var inertia=false
 @export var auto_break_mult=0.0
 var boost_state=0 #0 = ready, 1=active, 2=cooldown
-var lives: int = 0
+var lives: int = 3
 var invulnerable := false
 var screen_size
 #https://www.seekpng.com/ima/u2q8a9i1r5r5e6a9/
 var boostvel=Vector2.ZERO
 var current_velocity=Vector2.ZERO
+
+@onready var anim: AnimationPlayer = $AnimationPlayer
+var has_landed := false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -27,6 +31,7 @@ func _ready() -> void:
 	$AnimatedSprite2D/shield.animation="off"
 	lives = max_lives
 	emit_signal("lives_changed", lives)
+	connect("body_entered", Callable(self, "_on_body_entered"))
 	
 	hide()
 	screen_size= get_viewport_rect().size # Replace with function body.
@@ -99,6 +104,11 @@ func boost(velocity):
 	return boostvel
 	
 func _on_body_entered(body: Node2D) -> void:
+	
+	if body.is_in_group("planet"):
+		_land_on_planet()
+		return
+	
 	# body: the object that hits the spaceship
 	#print(body.get_name()) # prints the name of the class!
 	body.collision_with_spacceship(self)
@@ -109,6 +119,21 @@ func _on_body_entered(body: Node2D) -> void:
 	#hide()
 	#hit.emit()
 	#$CollisionShape2D.set_deferred("disabled",true)
+
+func _land_on_planet() -> void:
+	if has_landed:
+		return
+	has_landed = true
+	
+	#freeze control while anim plays
+	set_process(false)
+	set_physics_process(false)
+	
+	anim.play("planet_bump")
+	await  anim.animation_finished
+	
+	emit_signal("land")
+	
 	
 func recoil():
 	$AnimatedSprite2D/shield.animation="on"
