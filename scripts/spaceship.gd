@@ -13,6 +13,7 @@ signal land
 @export var break_acce_mult= 3
 @export var inertia=false
 @export var auto_break_mult=0.0
+@export var break_acce_mult_angle=-0.5
 var boost_state=0 #0 = ready, 1=active, 2=cooldown
 var lives: int = 3
 var invulnerable := false
@@ -71,8 +72,9 @@ func control_intertia(delta):
 	else:
 		current_velocity*=(1-auto_break_mult)
 		$AnimatedSprite2D.stop()
-	if (current_velocity.normalized()).dot(acccel.normalized())<-0.5:
+	if (current_velocity.normalized()).dot(acccel.normalized())<-break_acce_mult_angle:
 		acccel*=break_acce_mult
+		#greater acceleration when it is oposite to current velocity. Tun faster
 	current_velocity+=acccel*delta
 	if current_velocity.length() > max_speed:
 		current_velocity = current_velocity.normalized() * max_speed

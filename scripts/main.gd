@@ -22,7 +22,6 @@ func _ready() -> void:
 	
 	# Initialize HUD text
 
-	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
@@ -37,6 +36,7 @@ func new_game():
 	$Spaceship.start($StartPosition.position)
 	$StartTimer.start()
 	print("begin")
+	$tutorial.generate_field(0,0.15)
 	$tutorial.play()
 	await get_tree().create_timer(65).timeout
 	$intro_level.play()
