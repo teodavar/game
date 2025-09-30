@@ -15,7 +15,8 @@ var placeholder_icon: Texture2D
 
 func _ready() -> void:
 	print("+++++++++++++++++")
-	placeholder_icon = load("res://assets/Textures/heart (3).png") as Texture2D # replace later with real PNGs
+	placeholder_icon = load("res://assets/Textures/processor.png") as Texture2D # replace later with real PNGs
+	#placeholder_icon = load("res://assets/Textures/heart (3).png") as Texture2D # replace later with real PNGs
 	
 	#initialize captions and icons
 	cards[0].set_caption("Terraform")

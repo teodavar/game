@@ -5,11 +5,14 @@
 [ext_resource type="PackedScene" uid="uid://dp48tk7ctl8s2" path="res://scene/comets.tscn" id="2_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://3r8r1yvx0vc0" path="res://scene/asteroid.tscn" id="3_4j5ol"]
 [ext_resource type="Shader" uid="uid://dr4s25b4smy33" path="res://assets/scroll_background.gdshader" id="3_lquwl"]
-[ext_resource type="Texture2D" uid="uid://dh034g8tu7ikb" path="res://test/pexels-alex-andrews-271121-816608.jpg" id="4_lquwl"]
 [ext_resource type="PackedScene" uid="uid://dcdkapui08olm" path="res://scene/spaceobjectsingle.tscn" id="4_p1hux"]
 [ext_resource type="PackedScene" uid="uid://jp5ejq7fv784" path="res://scene/hud.tscn" id="5_of57s"]
+
+[ext_resource type="Texture2D" uid="uid://dk2xavhi2mm76" path="res://assets/Textures/SpaceBackground_Suerza_2.png" id="7_of57s"]
+
 [ext_resource type="PackedScene" uid="uid://cbljwt6dwmcqm" path="res://scene/intro_level.tscn" id="9_b5f6u"]
 [ext_resource type="PackedScene" uid="uid://debvso3hb33tj" path="res://scene/tutorial.tscn" id="10_tqoya"]
+
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_272bh"]
 shader = ExtResource("3_lquwl")
@@ -21,6 +24,8 @@ asteroid_scene = ExtResource("3_4j5ol")
 field_scene = ExtResource("4_p1hux")
 
 [node name="HUD" parent="." instance=ExtResource("5_of57s")]
+offset = Vector2(580, 580)
+transform = Transform2D(1, 0, 0, 1, 580, 580)
 
 [node name="TextureRect" type="TextureRect" parent="."]
 texture_repeat = 2
@@ -29,7 +34,7 @@ offset_left = -16.0
 offset_top = -9.0
 offset_right = 1311.0
 offset_bottom = 744.0
-texture = ExtResource("4_lquwl")
+texture = ExtResource("7_of57s")
 expand_mode = 1
 flip_h = true
 
@@ -43,7 +48,7 @@ wait_time = 2.0
 one_shot = true
 
 [node name="StartPosition" type="Marker2D" parent="."]
-position = Vector2(640, 600)
+position = Vector2(661, 516)
 
 [node name="intro_level" parent="." instance=ExtResource("9_b5f6u")]
 

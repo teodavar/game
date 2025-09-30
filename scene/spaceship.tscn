@@ -1,8 +1,12 @@
 [gd_scene load_steps=6 format=3 uid="uid://d1kphst6t2fxc"]
 
 [ext_resource type="Script" uid="uid://ckcimn22h2maf" path="res://scripts/spaceship.gd" id="1_dl81w"]
+
+[ext_resource type="Texture2D" uid="uid://nmr67lwxjlj6" path="res://assets/Textures/Spaceship_New.png" id="2_2oxxg"]
+
 [ext_resource type="Texture2D" uid="uid://dbpblxkii4s0v" path="res://assets/spaceship.transparent.png" id="2_2oxxg"]
 [ext_resource type="Texture2D" uid="uid://0gkddfxdx2gv" path="res://assets/17-174279_energy-shield-png-energy-shield-transparent.png" id="3_0igau"]
+
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_c0nl8"]
 animations = [{
@@ -50,7 +54,8 @@ script = ExtResource("1_dl81w")
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.5, 0.5)
+position = Vector2(0, 20)
+scale = Vector2(0.15, 0.15)
 sprite_frames = SubResource("SpriteFrames_c0nl8")
 animation = &"fly"
 
