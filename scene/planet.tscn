@@ -1,11 +1,11 @@
 [gd_scene load_steps=9 format=3 uid="uid://cj4ogd8kn1elh"]
 
 [ext_resource type="Script" uid="uid://b8mtrabrl6xg" path="res://scripts/planet.gd" id="1_ohpux"]
-[ext_resource type="Texture2D" uid="uid://bw6h80s5enj0a" path="res://assets/mercury.png" id="2_ataao"]
-[ext_resource type="Texture2D" uid="uid://u54qxkafbvel" path="res://assets/earth.png" id="2_u71er"]
-[ext_resource type="Texture2D" uid="uid://c6umewkbw8qyy" path="res://assets/mars.png" id="3_l5gcb"]
-[ext_resource type="Texture2D" uid="uid://b7ooxck6vcnm6" path="res://assets/saturn.png" id="5_vvgff"]
-[ext_resource type="Texture2D" uid="uid://c2q6p5hbrp61o" path="res://assets/venus.png" id="6_y3myt"]
+[ext_resource type="Texture2D" uid="uid://bw6h80s5enj0a" path="res://assets/Textures/Planets/mercury.png" id="2_ataao"]
+[ext_resource type="Texture2D" uid="uid://u54qxkafbvel" path="res://assets/Textures/Planets/earth.png" id="2_u71er"]
+[ext_resource type="Texture2D" uid="uid://c6umewkbw8qyy" path="res://assets/Textures/Planets/mars.png" id="3_l5gcb"]
+[ext_resource type="Texture2D" uid="uid://conigaiu033nc" path="res://assets/Textures/Planets/Planet3.png" id="5_u71er"]
+[ext_resource type="Texture2D" uid="uid://c2q6p5hbrp61o" path="res://assets/Textures/Planets/venus.png" id="6_y3myt"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_squbt"]
 animations = [{
@@ -35,7 +35,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("5_vvgff")
+"texture": ExtResource("5_u71er")
 }],
 "loop": true,
 "name": &"saturn",
@@ -62,9 +62,9 @@ script = ExtResource("1_ohpux")
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(-1.5258789e-05, 0)
+position = Vector2(-20, 0)
 sprite_frames = SubResource("SpriteFrames_squbt")
-animation = &"venus"
+animation = &"saturn"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5027285
