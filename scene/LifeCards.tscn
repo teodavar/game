@@ -168,9 +168,9 @@ offset_bottom = 40.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
 layout_mode = 0
-offset_right = 61.0
-offset_bottom = 107.0
-theme_override_constants/separation = 2
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/separation = 8
 alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="Panel/VBoxContainer"]
@@ -181,7 +181,7 @@ stretch_mode = 5
 
 [node name="Label" type="Label" parent="Panel/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 8
 text = "Terraform Device"
 horizontal_alignment = 1
 autowrap_mode = 1

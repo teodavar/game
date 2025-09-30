@@ -78,7 +78,7 @@ func recoil():
 	invulnerable=true
 	position=position+Vector2(0,5) # recoil after hit
 	position=position.clamp(Vector2.ZERO,screen_size)
-	await get_tree().create_timer(0.3).timeout
+	#await get_tree().create_timer(0.3).timeout
 	invulnerable=false
 	$AnimatedSprite2D/shield.animation="off2"
 	$AnimatedSprite2D.play()
@@ -108,12 +108,17 @@ func got_hit():
 	
 func crashed():
 	
+	
 	if invulnerable:
 		print("shield block")
 		return
 	lives = 0
 	emit_signal("lives_changed", lives)
 	crash.emit()
+	queue_free()
+	get_tree().change_scene_to_file("res://scene/game_over.tscn")
+	
+	
 	
 func landed(planet_id):
 	landing.emit(lives,planet_id)
