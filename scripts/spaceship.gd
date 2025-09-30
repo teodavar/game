@@ -66,7 +66,7 @@ func control_intertia(delta):
 	else:
 		current_velocity*=(1-auto_break_mult)
 		$AnimatedSprite2D.stop()
-	if (current_velocity.normalized()).dot(acccel.normalized())<0:
+	if (current_velocity.normalized()).dot(acccel.normalized())<-0.5:
 		acccel*=break_acce_mult
 	current_velocity+=acccel*delta
 	if current_velocity.length() > max_speed:
