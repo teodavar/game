@@ -31,6 +31,8 @@ func game_over():
 	$MobTimer.stop()
 	#reset.emit()
 	
+func introduce_spaceship():
+	$spaceship.start($StartPosition)
 func new_game():
 	score=0
 	$Spaceship.start($StartPosition.position)
@@ -67,4 +69,5 @@ func _on_spaceship_crash() -> void:
 
 
 func _on_spaceship_landing(current_lives: int, planet_id: String) -> void:
-	print("succesful landing on planet ",planet_id) # Replace with function body.
+	print("succesful landing on planet ",planet_id) 
+	get_tree().call_deferred("change_scene_to_file","res://scene/game_over.tscn")# Replace with function body.

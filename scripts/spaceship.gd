@@ -21,6 +21,7 @@ var screen_size
 #https://www.seekpng.com/ima/u2q8a9i1r5r5e6a9/
 var boostvel=Vector2.ZERO
 var current_velocity=Vector2.ZERO
+var in_intro=false
 
 @onready var anim: AnimationPlayer = $AnimationPlayer
 var has_landed := false
@@ -92,8 +93,16 @@ func control_intertia(delta):
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if has_landed:
-		var velocity =planet_landed_on.position-position
+	if in_intro:
+		var acccel=Vector2(0,250)
+		current_velocity+=acccel*delta
+		position+=current_velocity*delta
+	elif has_landed:
+		var velocity
+		if is_instance_valid(planet_landed_on):
+			velocity=planet_landed_on.position-position
+		else:
+			velocity=Vector2.ZERO
 		velocity=velocity.normalized() *speed/2
 		position+=velocity*delta
 		position=position.clamp(Vector2.ZERO,screen_size)
@@ -152,6 +161,10 @@ func	 start(pos):
 	position =pos
 	show()
 	$CollisionShape2D.disabled=false 
+	in_intro=true
+	current_velocity=Vector2(0,-500)
+	await get_tree().create_timer(2).timeout
+	in_intro=false
 	
 func got_hit():
 	
