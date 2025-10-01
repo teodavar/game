@@ -11,10 +11,14 @@ func _process(delta: float) -> void:
 	pass
 
 func play():
-	level_duration=10
+	level_duration=15
 	var huge_asteroid=self.asteroid_scene.instantiate()
 	huge_asteroid.reshape(4)
 	huge_asteroid.rotation+=PI
 	generate_field(comet_scene,Vector2(150,0),PI/2,300,0.3,3,1,3,Vector2(150,0))
 	generate_field(comet_scene,Vector2(600,0),PI/2,300,0.3,3,5,3,Vector2(150,0))
 	generate_field(huge_asteroid,Vector2(1100,1300),-PI/2-PI/24,75,0,0,0,1,Vector2(50,0))
+	generate_field(comet_scene,Vector2(-100,690),-PI/5,200,0.2,3,8,3,Vector2(0,50))
+	generate_field(comet_scene,Vector2(-100,690),-PI/5,400,0.2,3,9,3,Vector2(0,50))
+	generate_field(comet_scene,Vector2(-100,400),-PI/16,200,0.2,3,10,3,Vector2(0,50))
+	generate_field(comet_scene,Vector2(-100,400),-PI/16,400,0.2,3,11,3,Vector2(0,50))
