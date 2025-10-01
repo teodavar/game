@@ -6,6 +6,23 @@ class_name level extends Node2D
 #https://nineplanets.org/planets-transparent-background/
 @export var screen_size=Vector2.ZERO
 
+var asteroid_preset={
+	#"path":$asteroid_spawn,
+	"pathc_min":0,"pathc_max":1,"pathl_min":0.04,"pathl_max":0.2,
+							"speed_min":100,"speed_max":200,"refire_min":1,"refire_max":4,
+							"duration_min":5,"duration_max":20,
+							"num_min":1,"num_max":1
+	
+}
+
+var comet_preset={
+	#"path":$comet_spawn,
+	"pathc_min":0,"pathc_max":1,"pathl_min":0.01,"pathl_max":0.1,
+							"speed_min":200,"speed_max":400,"refire_min":0.1,"refire_max":0.5,
+							"duration_min":2,"duration_max":10,
+							"num_min":2,"num_max":5
+	
+}
 #create levels using generate_field and generate_random_field
 
 # Called when the node enters the scene tree for the first time.
@@ -70,19 +87,20 @@ func generate_field(object,spawn_path,direction,speed,refire_speed,fire_duration
 		add_child(spawn_path)
 	add_child(field_scene.instantiate().init(object,spawn_path,direction,speed,refire_speed,fire_duration,start_time,objects_perfire))
 	
-func generate_random_field(object,pathc_min=0,pathc_max=1,pathl_min=0.01,pathl_max=0.1,
-							speed_min=200,speed_max=400,refire_min=0.1,refire_max=0.5,
-							duration_min=2,duration_max=10,
-							num_min=1,num_max=3):
-	var path=slice_path($asteroid_spawn,randf_range(pathc_min,pathc_max),randf_range(pathl_min,pathl_max))
+func generate_random_field(object,start_time,param_preset=comet_preset):
+	var path=slice_path($comet_spawn,randf_range(param_preset["pathc_min"],param_preset["pathc_max"]),randf_range(param_preset["pathl_min"],param_preset["pathl_max"]))
 	var dir=get_random_direction(path)
-	var speed=randi_range(speed_min,speed_max)
-	var refire=randf_range(refire_min,refire_max)
-	var duration=randi_range(duration_min,duration_max)
-	var num=randi_range(num_min,num_max)
-	generate_field(object,path,dir,speed,refire,duration ,0,num)
+	var speed=randi_range(param_preset["speed_min"],param_preset["speed_max"])
+	var refire=randf_range(param_preset["refire_min"],param_preset["refire_max"])
+	var duration=randi_range(param_preset["duration_min"],param_preset["duration_max"])
+	var num=randi_range(param_preset["num_min"],param_preset["num_max"])
+	generate_field(object,path,dir,speed,refire,duration ,start_time,num)
 	return 0
 	
+func generate_planet(name,start_time,pos=Vector2(50,-self.screen_size.y),dir=PI/2,speed=25,variance=Vector2(100,0)):
+	var saturn=self.planet_scene.instantiate()
+	saturn.setplanet("saturn")
+	add_child(self.field_scene.instantiate().init(saturn,pos,dir,25,0,0,start_time,1,variance))
 	
 	#add_child(field_scene.instantiate().init(comet_scene,newp,PI/4,100,0.1,8,0,3))
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -90,7 +108,7 @@ func _process(delta: float) -> void:
 	pass
 func play():
 	print("begin random field")
-	generate_random_field(comet_scene)
+	generate_random_field(comet_scene,0)
 
 	#add_child(field_scene.instantiate().init(asteroid_scene,$right,0,80,3,4,8,1))
 	#add_child(field_scene.instantiate().init(comet_scene,$left,PI,200,0.5,6,18,1))
