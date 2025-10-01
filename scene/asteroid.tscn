@@ -50,7 +50,6 @@ collision_layer = 4
 collision_mask = 3
 mass = 1000.0
 gravity_scale = 0.0
-inertia = 1000.0
 script = ExtResource("1_gktfr")
 metadata/_edit_group_ = true
 
@@ -64,9 +63,8 @@ rotation = -1.5707964
 shape = SubResource("CapsuleShape2D_uo68c")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-position = Vector2(14, 2)
 rotation = -1.5707964
-rect = Rect2(-77.66095, -129.29022, 161.88797, 235.28712)
+rect = Rect2(-80.99866, -118.72085, 159.66286, 236.39963)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

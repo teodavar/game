@@ -21,6 +21,7 @@ func _process(delta: float) -> void:
 	pass
 
 func reshape(scale):
+	$VisibleOnScreenNotifier2D.scale*=scale
 	$AnimatedSprite2D.scale*=scale
 	$CollisionShape2D.scale*=scale
 

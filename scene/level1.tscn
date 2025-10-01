@@ -1,9 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://d1an7vgpqxga5"]
 
-[ext_resource type="Script" uid="uid://vsurclrt8ra6" path="res://scripts/tutorial.gd" id="1_0a4uc"]
-[ext_resource type="PackedScene" uid="uid://dp48tk7ctl8s2" path="res://scene/comets.tscn" id="2_nk78g"]
-[ext_resource type="PackedScene" uid="uid://3r8r1yvx0vc0" path="res://scene/asteroid.tscn" id="3_a215g"]
-[ext_resource type="PackedScene" uid="uid://dcdkapui08olm" path="res://scene/spaceobjectsingle.tscn" id="4_ebr37"]
+[ext_resource type="Script" uid="uid://4ayle08h8xcd" path="res://scripts/level_1.gd" id="1_cknwn"]
 
 [sub_resource type="Curve2D" id="Curve2D_epgyv"]
 _data = {
@@ -23,11 +20,26 @@ _data = {
 }
 point_count = 2
 
-[node name="tutorial" type="Node2D"]
-script = ExtResource("1_0a4uc")
-comet_scene = ExtResource("2_nk78g")
-asteroid_scene = ExtResource("3_a215g")
-field_scene = ExtResource("4_ebr37")
+[sub_resource type="Curve2D" id="Curve2D_won01"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -120, -117, 0, 0, 0, 0, 1419, -145, 0, 0, 0, 0, 1450, 862, 0, 0, 0, 0, -135, 864, 0, 0, 0, 0, -120, -117)
+}
+point_count = 5
+
+[sub_resource type="Curve2D" id="Curve2D_mqdaa"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -298, -275, 0, 0, 0, 0, 1669, -331, 0, 0, 0, 0, 1651, 1057, 0, 0, 0, 0, -298, 1062, 0, 0, 0, 0, -298, -275)
+}
+point_count = 5
+
+[sub_resource type="Curve2D" id="Curve2D_mo30s"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 276, 192, 0, 0, 0, 0, 1003, 174, 0, 0, 0, 0, 1003, 532, 0, 0, 0, 0, 283, 532, 0, 0, 0, 0, 276, 192)
+}
+point_count = 5
+
+[node name="level1" type="Node2D"]
+script = ExtResource("1_cknwn")
 
 [node name="up" type="Path2D" parent="."]
 curve = SubResource("Curve2D_epgyv")
@@ -37,3 +49,12 @@ curve = SubResource("Curve2D_hegci")
 
 [node name="right" type="Path2D" parent="."]
 curve = SubResource("Curve2D_h8sj1")
+
+[node name="asteroid_spawn" type="Path2D" parent="."]
+curve = SubResource("Curve2D_won01")
+
+[node name="comet_spawn" type="Path2D" parent="."]
+curve = SubResource("Curve2D_mqdaa")
+
+[node name="test" type="Path2D" parent="."]
+curve = SubResource("Curve2D_mo30s")

@@ -10,6 +10,7 @@ func _ready() -> void:
 	$AnimatedSprite2D.play()
 	 # Replace with function body.
 func reshape(scale):
+	$VisibleOnScreenNotifier2D.scale*=scale
 	$AnimatedSprite2D.scale*=scale
 	$CollisionShape2D.scale*=scale
 func _on_parent_reset() -> void:

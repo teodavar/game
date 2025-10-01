@@ -38,9 +38,8 @@ _data = {
 }
 point_count = 5
 
-[node name="level" type="Node2D"]
+[node name="random_level" type="Node2D"]
 script = ExtResource("1_dwke8")
-screen_size = null
 
 [node name="up" type="Path2D" parent="."]
 curve = SubResource("Curve2D_epgyv")

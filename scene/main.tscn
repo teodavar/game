@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://de8pbjay47e46"]
+[gd_scene load_steps=15 format=3 uid="uid://de8pbjay47e46"]
 
 [ext_resource type="Script" uid="uid://b4fout3yjkh4" path="res://scripts/main.gd" id="1_h2yge"]
 [ext_resource type="PackedScene" uid="uid://d1kphst6t2fxc" path="res://scene/spaceship.tscn" id="1_ig7tw"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://debvso3hb33tj" path="res://scene/tutorial.tscn" id="10_tqoya"]
 [ext_resource type="AudioStream" uid="uid://ng1j5l82ovx5" path="res://assets/Audio/Matooma - First Step on Mars.wav" id="11_k65ib"]
 [ext_resource type="PackedScene" uid="uid://bsx12p356iv2s" path="res://scene/random_level.tscn" id="12_wscrc"]
+[ext_resource type="PackedScene" uid="uid://d1an7vgpqxga5" path="res://scene/level1.tscn" id="13_mswub"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_272bh"]
 shader = ExtResource("3_lquwl")
@@ -59,7 +60,8 @@ volume_db = -3.0
 autoplay = true
 
 [node name="random_level" parent="." instance=ExtResource("12_wscrc")]
-screen_size = Vector2(0, 0)
+
+[node name="level1" parent="." instance=ExtResource("13_mswub")]
 
 [connection signal="crash" from="Spaceship" to="." method="_on_spaceship_crash"]
 [connection signal="landing" from="Spaceship" to="." method="_on_spaceship_landing"]
