@@ -2,6 +2,7 @@ extends CanvasLayer
 #HUD only controls life display not life logic. removed death check and ending control.
 
 
+
 #@onready var lives_label: Label = $LivesLabel
 @onready var cards: Array[LifeCard] = [
 	$Cards/Card1 as LifeCard,
@@ -14,7 +15,8 @@ var placeholder_icon: Texture2D
 
 func _ready() -> void:
 	print("+++++++++++++++++")
-	placeholder_icon = load("res://assets/Textures/heart (3).png") as Texture2D # replace later with real PNGs
+	placeholder_icon = load("res://assets/Textures/processor.png") as Texture2D # replace later with real PNGs
+	#placeholder_icon = load("res://assets/Textures/heart (3).png") as Texture2D # replace later with real PNGs
 	
 	#initialize captions and icons
 	cards[0].set_caption("Terraform")
@@ -29,6 +31,7 @@ func _ready() -> void:
 func update_lives(current: int) -> void:
 	#lives_label.text = "Lives: %d" % current
 	print("!!!!!!!!!!!!!!!!")
+	
 	for i in range(cards.size()):
 		var should_show := i < current
 		var card := cards[i]

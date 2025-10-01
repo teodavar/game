@@ -2,6 +2,8 @@ extends Node
 @export var comet_scene: PackedScene
 @export var asteroid_scene: PackedScene
 @export var field_scene: PackedScene
+@export var planet_scene= load("res://scene/planet.tscn")
+
 
 # XX
 @onready var hud = $HUD
@@ -9,16 +11,16 @@ extends Node
 
 var score
 signal reset
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	$TextureRect.z_index=-11
+	ship.connect("land", Callable(self, "_on_ship_landed"))
 	new_game() # Replace with function body.
 
 
 	#hud.init_lives(ship.lives)
 	
 	# Initialize HUD text
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -29,15 +31,18 @@ func game_over():
 	$MobTimer.stop()
 	#reset.emit()
 	
-	
 func new_game():
 	score=0
 	$Spaceship.start($StartPosition.position)
 	$StartTimer.start()
+	$tutorial.generate_random_field(comet_scene)
 	print("begin")
-	add_child(field_scene.instantiate().init(comet_scene,$CometPath,3*PI/4,200,0.5,4,0,3))
-	add_child(field_scene.instantiate().init(asteroid_scene,$spawnpath,0,100,1,4,8,1))
-	add_child(field_scene.instantiate().init(asteroid_scene,$sp3,PI,50,0,0,18,1))
+	$tutorial.play()
+	await get_tree().create_timer(65).timeout
+	$intro_level.play()
+	#add_child(field_scene.instantiate().init(comet_scene,$CometPath,3*PI/4,200,0.4,0,0,3))
+	#add_child(field_scene.instantiate().init(asteroid_scene,$spawnpath,0,100,6,0,6,1))
+	#add_child(field_scene.instantiate().init(asteroid_scene,$sp3,PI,50,0,0,18,1))
 
 #func _on_spaceship_hit() -> void:
 	#print("11111111")
@@ -48,20 +53,14 @@ func new_game():
 	#get_tree().call_group("comets2", "queue_free")
 
 
-
-	
-	
 func _on_score_timer_timeout() -> void:
 	score+=1 # Replace with function body.
-
 
 func _on_start_timer_timeout() -> void:
 	$ScoreTimer.start()
 
-	
-
-
 func _on_spaceship_crash() -> void:
+	get_tree().call_deferred("change_scene_to_file","res://scene/game_over.tscn")
 	print("death") # Replace with function body.
 
 

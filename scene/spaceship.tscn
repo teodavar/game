@@ -1,42 +1,147 @@
-[gd_scene load_steps=5 format=3 uid="uid://d1kphst6t2fxc"]
+[gd_scene load_steps=10 format=3 uid="uid://d1kphst6t2fxc"]
 
 [ext_resource type="Script" uid="uid://ckcimn22h2maf" path="res://scripts/spaceship.gd" id="1_dl81w"]
-[ext_resource type="Texture2D" uid="uid://dbpblxkii4s0v" path="res://assets/spaceship.transparent.png" id="2_2oxxg"]
+[ext_resource type="Texture2D" uid="uid://dbpblxkii4s0v" path="res://assets/Textures/spaceship.transparent.png" id="2_2oxxg"]
+[ext_resource type="Texture2D" uid="uid://nmr67lwxjlj6" path="res://assets/Textures/Spaceship_New.png" id="2_wkmid"]
+[ext_resource type="Texture2D" uid="uid://0gkddfxdx2gv" path="res://assets/Textures/17-174279_energy-shield-png-energy-shield-transparent.png" id="3_0igau"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_c0nl8"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_2oxxg")
+"texture": ExtResource("2_wkmid")
 }],
 "loop": true,
 "name": &"fly",
 "speed": 5.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_2oxxg")
+}],
 "loop": true,
 "name": &"fly2",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": null
+}],
+"loop": true,
+"name": &"off",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_0igau")
+}],
+"loop": true,
+"name": &"on",
+"speed": 5.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1dtnr"]
-radius = 14.0
-height = 84.0
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_wkmid"]
+points = PackedVector2Array(0, -58.75, -6.1538463, -16.25, -13.846154, -6.25, -17.692308, 13.75, 0, -2.5, 17.692308, 12.5, 13.846154, -6.25, 6.1538463, -16.25)
+
+[sub_resource type="Animation" id="Animation_nsyhb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_wkmid"]
+resource_name = "planet_bump"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.45),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.45),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mdxg7"]
+_data = {
+&"RESET": SubResource("Animation_nsyhb"),
+&"planet_bump": SubResource("Animation_wkmid")
+}
 
 [node name="Spaceship" type="Area2D"]
 position = Vector2(0, 3)
-collision_mask = 3
+collision_mask = 15
 script = ExtResource("1_dl81w")
+impulse = 1500
+inertia = true
+auto_break_mult = 0.05
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.5, 0.5)
+position = Vector2(0.19999693, 4.799995)
+scale = Vector2(0.12, 0.12)
 sprite_frames = SubResource("SpriteFrames_c0nl8")
 animation = &"fly"
 
+[node name="shield" type="AnimatedSprite2D" parent="AnimatedSprite2D"]
+position = Vector2(0, -108.33333)
+scale = Vector2(1.3, 1.3)
+sprite_frames = SubResource("SpriteFrames_c0nl8")
+animation = &"on"
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, 0.8)
-scale = Vector2(1.5, 1)
-shape = SubResource("CapsuleShape2D_1dtnr")
+position = Vector2(0.19999695, 4.7999954)
+scale = Vector2(1.3, 0.8)
+shape = SubResource("ConvexPolygonShape2D_wkmid")
+
+[node name="boostcooldown" type="Timer" parent="."]
+one_shot = true
+
+[node name="boostactive" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_mdxg7")
+}
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="boostcooldown" to="." method="_on_boostcooldown_timeout"]
+[connection signal="timeout" from="boostactive" to="." method="_on_boostactive_timeout"]

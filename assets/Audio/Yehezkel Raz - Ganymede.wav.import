@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bwj24mslo8b3w"
+path="res://.godot/imported/Yehezkel Raz - Ganymede.wav-ef8250b0de375a50fe0b7e9fba06a34d.sample"
+
+[deps]
+
+source_file="res://assets/Audio/Yehezkel Raz - Ganymede.wav"
+dest_files=["res://.godot/imported/Yehezkel Raz - Ganymede.wav-ef8250b0de375a50fe0b7e9fba06a34d.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

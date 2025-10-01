@@ -7,6 +7,7 @@
 script = ExtResource("1_37p78")
 
 [node name="LivesLabel" type="Label" parent="."]
+visible = false
 offset_left = 194.0
 offset_right = 341.0
 offset_bottom = 51.0
@@ -15,6 +16,7 @@ text = "3"
 [node name="Cards" type="HBoxContainer" parent="."]
 offset_right = 144.0
 offset_bottom = 43.0
+theme_override_constants/separation = 50
 
 [node name="Card1" parent="Cards" instance=ExtResource("2_o8u2p")]
 layout_mode = 2

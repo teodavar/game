@@ -1,0 +1,64 @@
+[gd_scene load_steps=4 format=3 uid="uid://bt6bk8j82mg35"]
+
+[ext_resource type="Script" uid="uid://dqeopncq7elx0" path="res://scripts/game_over.gd" id="1_mxr41"]
+[ext_resource type="Texture2D" uid="uid://dk2xavhi2mm76" path="res://assets/Textures/SpaceBackground_Suerza_2.png" id="2_bc2bx"]
+[ext_resource type="AudioStream" uid="uid://bbdotp27nerh2" path="res://assets/Audio/Eytan Krief - Slick UI - Digital Click.wav" id="3_bc2bx"]
+
+[node name="GameOver" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mxr41")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_bc2bx")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -20.0
+offset_right = 28.5
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 72
+text = "GAME OVER"
+
+[node name="Retry Button" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Retry?"
+
+[node name="Quit" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Quit
+"
+
+[node name="Hover" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_bc2bx")
+
+[node name="Clicked" type="AudioStreamPlayer" parent="."]
+
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/Retry Button" to="." method="_on_retry_button_mouse_entered"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Retry Button" to="." method="_on_button_pressed"]
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_mouse_entered"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

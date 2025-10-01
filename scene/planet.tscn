@@ -1,0 +1,78 @@
+[gd_scene load_steps=9 format=3 uid="uid://cj4ogd8kn1elh"]
+
+[ext_resource type="Script" uid="uid://b8mtrabrl6xg" path="res://scripts/planet.gd" id="1_ohpux"]
+[ext_resource type="Texture2D" uid="uid://bw6h80s5enj0a" path="res://assets/Textures/Planets/mercury.png" id="2_ataao"]
+[ext_resource type="Texture2D" uid="uid://u54qxkafbvel" path="res://assets/Textures/Planets/earth.png" id="2_u71er"]
+[ext_resource type="Texture2D" uid="uid://c6umewkbw8qyy" path="res://assets/Textures/Planets/mars.png" id="3_l5gcb"]
+[ext_resource type="Texture2D" uid="uid://conigaiu033nc" path="res://assets/Textures/Planets/Planet3.png" id="5_u71er"]
+[ext_resource type="Texture2D" uid="uid://c2q6p5hbrp61o" path="res://assets/Textures/Planets/venus.png" id="6_y3myt"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_squbt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_u71er")
+}],
+"loop": true,
+"name": &"earth",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_l5gcb")
+}],
+"loop": true,
+"name": &"mars",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ataao")
+}],
+"loop": true,
+"name": &"mercury",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_u71er")
+}],
+"loop": true,
+"name": &"saturn",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_y3myt")
+}],
+"loop": true,
+"name": &"venus",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_u71er"]
+radius = 157.38487
+
+[node name="planet" type="RigidBody2D" groups=["comets2", "planet"]]
+collision_layer = 8
+mass = 1000.0
+gravity_scale = 0.0
+inertia = 1000.0
+script = ExtResource("1_ohpux")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-20, 0)
+sprite_frames = SubResource("SpriteFrames_squbt")
+animation = &"saturn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5027285
+shape = SubResource("CircleShape2D_u71er")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(14, 2)
+rect = Rect2(-171, -156, 312, 310)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

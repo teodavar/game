@@ -4,31 +4,16 @@
 [ext_resource type="PackedScene" uid="uid://d1kphst6t2fxc" path="res://scene/spaceship.tscn" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://dp48tk7ctl8s2" path="res://scene/comets.tscn" id="2_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://3r8r1yvx0vc0" path="res://scene/asteroid.tscn" id="3_4j5ol"]
-[ext_resource type="Shader" uid="uid://dr4s25b4smy33" path="res://assets/scroll_background.gdshader" id="3_lquwl"]
-[ext_resource type="Texture2D" uid="uid://dh034g8tu7ikb" path="res://test/pexels-alex-andrews-271121-816608.jpg" id="4_lquwl"]
+[ext_resource type="Shader" path="res://assets/Textures/scroll_background.gdshader" id="3_lquwl"]
 [ext_resource type="PackedScene" uid="uid://dcdkapui08olm" path="res://scene/spaceobjectsingle.tscn" id="4_p1hux"]
 [ext_resource type="PackedScene" uid="uid://jp5ejq7fv784" path="res://scene/hud.tscn" id="5_of57s"]
+[ext_resource type="Texture2D" uid="uid://4q088qgb18dj" path="res://assets/Textures/Background_blue.png" id="7_tqoya"]
+[ext_resource type="PackedScene" uid="uid://cbljwt6dwmcqm" path="res://scene/intro_level.tscn" id="9_b5f6u"]
+[ext_resource type="PackedScene" uid="uid://debvso3hb33tj" path="res://scene/tutorial.tscn" id="10_tqoya"]
+[ext_resource type="AudioStream" uid="uid://ng1j5l82ovx5" path="res://assets/Audio/Matooma - First Step on Mars.wav" id="11_k65ib"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_272bh"]
 shader = ExtResource("3_lquwl")
-
-[sub_resource type="Curve2D" id="Curve2D_ig7tw"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 32, -43, 0, 0, 0, 0, 1306, -37, 0, 0, 0, 0, 1314, 692)
-}
-point_count = 3
-
-[sub_resource type="Curve2D" id="Curve2D_p1hux"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, -36, 91, 0, 0, 0, 0, -46, 458)
-}
-point_count = 2
-
-[sub_resource type="Curve2D" id="Curve2D_b5f6u"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 1380, 137, 0, 0, 0, 0, 1387, 597)
-}
-point_count = 2
 
 [node name="Main" type="Node"]
 script = ExtResource("1_h2yge")
@@ -37,6 +22,8 @@ asteroid_scene = ExtResource("3_4j5ol")
 field_scene = ExtResource("4_p1hux")
 
 [node name="HUD" parent="." instance=ExtResource("5_of57s")]
+offset = Vector2(540, 640)
+transform = Transform2D(1, 0, 0, 1, 540, 640)
 
 [node name="TextureRect" type="TextureRect" parent="."]
 texture_repeat = 2
@@ -45,8 +32,9 @@ offset_left = -16.0
 offset_top = -9.0
 offset_right = 1311.0
 offset_bottom = 744.0
-texture = ExtResource("4_lquwl")
+texture = ExtResource("7_tqoya")
 expand_mode = 1
+flip_h = true
 
 [node name="Spaceship" parent="." instance=ExtResource("1_ig7tw")]
 position = Vector2(181, 95)
@@ -58,16 +46,16 @@ wait_time = 2.0
 one_shot = true
 
 [node name="StartPosition" type="Marker2D" parent="."]
-position = Vector2(640, 600)
+position = Vector2(661, 516)
 
-[node name="CometPath" type="Path2D" parent="."]
-curve = SubResource("Curve2D_ig7tw")
+[node name="intro_level" parent="." instance=ExtResource("9_b5f6u")]
 
-[node name="spawnpath" type="Path2D" parent="."]
-curve = SubResource("Curve2D_p1hux")
+[node name="tutorial" parent="." instance=ExtResource("10_tqoya")]
 
-[node name="sp3" type="Path2D" parent="."]
-curve = SubResource("Curve2D_b5f6u")
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_k65ib")
+volume_db = -3.0
+autoplay = true
 
 [connection signal="crash" from="Spaceship" to="." method="_on_spaceship_crash"]
 [connection signal="landing" from="Spaceship" to="." method="_on_spaceship_landing"]
