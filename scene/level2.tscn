@@ -1,6 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://d1an7vgpqxga5"]
+[gd_scene load_steps=8 format=3 uid="uid://b6lbvtb5noi4o"]
 
-[ext_resource type="Script" uid="uid://4ayle08h8xcd" path="res://scripts/level_1.gd" id="1_cknwn"]
+[ext_resource type="Script" uid="uid://csncrt8wwlx7f" path="res://scripts/level_2.gd" id="1_qhexg"]
 
 [sub_resource type="Curve2D" id="Curve2D_epgyv"]
 _data = {
@@ -38,8 +38,8 @@ _data = {
 }
 point_count = 5
 
-[node name="level1" type="Node2D"]
-script = ExtResource("1_cknwn")
+[node name="level2" type="Node2D"]
+script = ExtResource("1_qhexg")
 
 [node name="up" type="Path2D" parent="."]
 curve = SubResource("Curve2D_epgyv")

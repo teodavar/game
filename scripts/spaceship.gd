@@ -21,11 +21,13 @@ var screen_size
 #https://www.seekpng.com/ima/u2q8a9i1r5r5e6a9/
 var boostvel=Vector2.ZERO
 var current_velocity=Vector2.ZERO
+var in_intro=false
 
 @onready var anim: AnimationPlayer = $AnimationPlayer
 var has_landed := false
 var planet_landed_on 
-
+var manual_shield=false
+var hit_shield=false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	self.z_index=-3
@@ -54,8 +56,8 @@ func controls_simple(delta):
 		$AnimatedSprite2D.stop()
 	velocity+=boost(velocity)
 	return velocity*delta
-func check_shield():
-	if Input.is_action_pressed("shield"):
+func control_shield():
+	if manual_shield or hit_shield:
 		$AnimatedSprite2D/shield.animation="on"
 		$AnimatedSprite2D.play()
 		invulnerable=true
@@ -63,10 +65,16 @@ func check_shield():
 		invulnerable=false
 		$AnimatedSprite2D/shield.animation="off"
 		$AnimatedSprite2D.play()
+func check_shield():
+	if Input.is_action_pressed("shield"):
+		manual_shield=true
+	else:
+		manual_shield=false
+	control_shield()
 		
 func control_intertia(delta):
 	var acccel =Vector2.ZERO
-	#check_shield()
+	check_shield()
 	if Input.is_action_pressed("move_down"):
 		acccel.y+=1
 	if Input.is_action_pressed("move_up"):
@@ -92,8 +100,16 @@ func control_intertia(delta):
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if has_landed:
-		var velocity =planet_landed_on.position-position
+	if in_intro:
+		var acccel=Vector2(0,250)
+		current_velocity+=acccel*delta
+		position+=current_velocity*delta
+	elif has_landed:
+		var velocity
+		if is_instance_valid(planet_landed_on):
+			velocity=planet_landed_on.position-position
+		else:
+			velocity=Vector2.ZERO
 		velocity=velocity.normalized() *speed/2
 		position+=velocity*delta
 		position=position.clamp(Vector2.ZERO,screen_size)
@@ -138,11 +154,13 @@ func _on_body_entered(body: Node2D) -> void:
 func recoil():
 	$AnimatedSprite2D/shield.animation="on"
 	$AnimatedSprite2D.play()
+	hit_shield=true
 	invulnerable=true
 	print("recoil!!!!!")
 	position=position+Vector2(0,5) # recoil after hit
 	position=position.clamp(Vector2.ZERO,screen_size)
 	await get_tree().create_timer(0.3).timeout
+	hit_shield=false
 	invulnerable=false
 	$AnimatedSprite2D/shield.animation="off"
 	$AnimatedSprite2D.play()
@@ -150,8 +168,14 @@ func recoil():
 	
 func	 start(pos):
 	position =pos
+	invulnerable=true
 	show()
 	$CollisionShape2D.disabled=false 
+	in_intro=true
+	current_velocity=Vector2(0,-500)
+	await get_tree().create_timer(2).timeout
+	invulnerable=false
+	in_intro=false
 	
 func got_hit():
 	

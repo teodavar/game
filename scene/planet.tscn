@@ -62,9 +62,8 @@ script = ExtResource("1_ohpux")
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(-20, 0)
 sprite_frames = SubResource("SpriteFrames_squbt")
-animation = &"saturn"
+animation = &"venus"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5027285
@@ -72,7 +71,7 @@ shape = SubResource("CircleShape2D_u71er")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2(14, 2)
-rect = Rect2(-171, -156, 312, 310)
+rect = Rect2(-243, -177, 439, 347)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
