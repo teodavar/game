@@ -35,8 +35,8 @@ func new_game():
 	score=0
 	$Spaceship.start($StartPosition.position)
 	$StartTimer.start()
+	$tutorial.generate_random_field(comet_scene)
 	print("begin")
-	$tutorial.generate_field(0,0.15)
 	$tutorial.play()
 	await get_tree().create_timer(65).timeout
 	$intro_level.play()
