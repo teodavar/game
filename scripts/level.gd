@@ -5,6 +5,9 @@ class_name level extends Node2D
 @export var planet_scene= load("res://scene/planet.tscn")
 #https://nineplanets.org/planets-transparent-background/
 @export var screen_size=Vector2.ZERO
+
+#create levels using generate_field and generate_random_field
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	screen_size= get_viewport_rect().size
@@ -67,13 +70,16 @@ func generate_field(object,spawn_path,direction,speed,refire_speed,fire_duration
 		add_child(spawn_path)
 	add_child(field_scene.instantiate().init(object,spawn_path,direction,speed,refire_speed,fire_duration,start_time,objects_perfire))
 	
-func generate_random_field(object):
-	var path=slice_path($asteroid_spawn,randf_range(0,1),randf_range(0.05,0.3))
+func generate_random_field(object,pathc_min=0,pathc_max=1,pathl_min=0.01,pathl_max=0.1,
+							speed_min=200,speed_max=400,refire_min=0.1,refire_max=0.5,
+							duration_min=2,duration_max=10,
+							num_min=1,num_max=3):
+	var path=slice_path($asteroid_spawn,randf_range(pathc_min,pathc_max),randf_range(pathl_min,pathl_max))
 	var dir=get_random_direction(path)
-	var speed=randi_range(200,400)
-	var refire=randf_range(0.05,0.5)
-	var duration=randi_range(1,10)
-	var num=randi_range(3,5)
+	var speed=randi_range(speed_min,speed_max)
+	var refire=randf_range(refire_min,refire_max)
+	var duration=randi_range(duration_min,duration_max)
+	var num=randi_range(num_min,num_max)
 	generate_field(object,path,dir,speed,refire,duration ,0,num)
 	return 0
 	
