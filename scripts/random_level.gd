@@ -1,7 +1,7 @@
 extends level
 
 
-func play():
+func play(start_time=0):
 	level_duration=20
 	generate_random_field(comet_scene,1)
 	generate_random_field(asteroid_scene,2,asteroid_preset)

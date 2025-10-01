@@ -62,9 +62,8 @@ script = ExtResource("1_ohpux")
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(-20, 0)
 sprite_frames = SubResource("SpriteFrames_squbt")
-animation = &"saturn"
+animation = &"venus"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5027285

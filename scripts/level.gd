@@ -76,7 +76,7 @@ func slice_path(path,centre,length):
 		
 func pick_random_fva(va):
 	var L=va.size()
-	return va.get(randi_range(0, L))
+	return va.get(randi_range(0, L-1))
 func get_random_direction(path,variance=PI/12):
 	var baked_points = path.curve.get_baked_points()
 	var point=pick_random_fva(baked_points)
@@ -111,11 +111,11 @@ func generate_planet(name,start_time,pos=Vector2(50,-self.screen_size.y),dir=PI/
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
-func play():
+func play(start_time=0):
 	print("begin random field")
 	generate_random_field(comet_scene,0)
 
 	#add_child(field_scene.instantiate().init(asteroid_scene,$right,0,80,3,4,8,1))
 	#add_child(field_scene.instantiate().init(comet_scene,$left,PI,200,0.5,6,18,1))
 
-	return 0
+	return level_duration 

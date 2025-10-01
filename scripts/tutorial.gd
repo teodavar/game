@@ -5,11 +5,12 @@ extends level
 	# Replace with function body.
 	#following function was given by AI
 
-func play():
+func play(start_time=0):
 	level_duration=65
 	print("begin tutorial")
 	var saturn=self.planet_scene.instantiate()
 	saturn.setplanet("saturn")
+	saturn.reshape(1.5)
 	add_child(self.field_scene.instantiate().init(self.comet_scene,$up,PI/2,100,1,4,2,1))
 	add_child(self.field_scene.instantiate().init(self.comet_scene,$left,PI/8,100,1,8,8,1))
 	add_child(self.field_scene.instantiate().init(self.comet_scene,$right,PI,200,0.5,8,22,1))

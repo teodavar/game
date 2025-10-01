@@ -39,6 +39,9 @@ func new_game():
 	$StartTimer.start()
 	#$tutorial.generate_random_field(comet_scene)
 	print("begin")
+	$level2.play()
+	await get_tree().create_timer($level2.level_duration).timeout
+	
 	$level1.play()
 	await get_tree().create_timer($level1.level_duration).timeout
 	
