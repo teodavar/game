@@ -59,6 +59,7 @@ volume_db = -3.0
 autoplay = true
 
 [node name="random_level" parent="." instance=ExtResource("12_wscrc")]
+screen_size = Vector2(0, 0)
 
 [connection signal="crash" from="Spaceship" to="." method="_on_spaceship_crash"]
 [connection signal="landing" from="Spaceship" to="." method="_on_spaceship_landing"]

@@ -40,10 +40,11 @@ func new_game():
 	#$tutorial.generate_random_field(comet_scene)
 	print("begin")
 	$random_level.play()
-	await get_tree().create_timer(35).timeout
+	await get_tree().create_timer($random_level.level_duration).timeout
 	$tutorial.play()
-	await get_tree().create_timer(65).timeout
+	await get_tree().create_timer($tutorial.level_duration).timeout
 	$intro_level.play()
+	await get_tree().create_timer($intro_level.level_duration).timeout
 	#add_child(field_scene.instantiate().init(comet_scene,$CometPath,3*PI/4,200,0.4,0,0,3))
 	#add_child(field_scene.instantiate().init(asteroid_scene,$spawnpath,0,100,6,0,6,1))
 	#add_child(field_scene.instantiate().init(asteroid_scene,$sp3,PI,50,0,0,18,1))
@@ -59,7 +60,10 @@ func new_game():
 
 func _on_score_timer_timeout() -> void:
 	score+=1 # Replace with function body.
-
+func play_level(level):
+	level.play()
+	await get_tree().create_timer(level.level_duration).timeout
+	return 0
 func _on_start_timer_timeout() -> void:
 	$ScoreTimer.start()
 

@@ -26,7 +26,7 @@ var in_intro=false
 @onready var anim: AnimationPlayer = $AnimationPlayer
 var has_landed := false
 var planet_landed_on 
-
+var level_duration=35
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	self.z_index=-3

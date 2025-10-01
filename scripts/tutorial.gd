@@ -1,12 +1,12 @@
 extends level
 
 # Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	screen_size= get_viewport_rect().size
+
 	# Replace with function body.
 	#following function was given by AI
 
 func play():
+	level_duration=65
 	print("begin tutorial")
 	var saturn=self.planet_scene.instantiate()
 	saturn.setplanet("saturn")
