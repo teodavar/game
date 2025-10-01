@@ -4,7 +4,8 @@ extends planet_level
 
 	# Replace with function body.
 	#following function was given by AI
-
+func ready():
+	super._ready()
 func play(start_time=0):
 	level_duration=65
 	print("begin tutorial")

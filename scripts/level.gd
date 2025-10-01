@@ -5,6 +5,7 @@ class_name level extends Node2D
 @export var planet_scene= load("res://scene/planet.tscn")
 #https://nineplanets.org/planets-transparent-background/
 @export var screen_size=Vector2.ZERO
+var flip_b=0
 var level_duration=35
 var asteroid_preset={
 	#"path":$asteroid_spawn,
@@ -24,7 +25,29 @@ var comet_preset={
 	
 }
 #create levels using generate_field and generate_random_field
-
+func flip(v):
+	var r=v
+	if flip_b % 2==1:
+		r=flipx(r)
+	if flip_b>1:
+		r=flipy(r)	
+	print(r," ",flip_b)
+	return r
+func flipx(v):
+	if v is Vector2:
+		return Vector2(screen_size.x-v.x,v.y)
+	elif v is Path2D:
+		flip_path2d_horizontally(v)
+	else: 
+		return PI-v
+func flipy(v):
+	if v is Vector2:
+		return Vector2(v.x,screen_size.y-v.y)
+	elif v is Path2D:
+		flip_path2d_vertically(v)
+	else: 
+		return -v
+	
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	comet_preset["path"]=$comet_spawn
@@ -53,6 +76,41 @@ func circular_slice(array_to_slice: Array, start_index: int, end_index: int) -> 
 		result_array = first_part + second_part
 		
 	return result_array
+#following function was given to me by AI and then edited
+func flip_path2d_horizontally(path_node: Path2D):
+	var curve: Curve2D = path_node.curve
+	var new_curve = Curve2D.new()
+
+	for i in range(curve.point_count):
+		var point_position = curve.get_point_position(i)
+		var in_tangent = curve.get_point_in(i)
+		var out_tangent = curve.get_point_out(i)
+
+		# Negate the x-coordinate of the position and tangents
+		new_curve.add_point(
+			Vector2(screen_size.x-point_position.x, point_position.y),
+			Vector2(screen_size.x-in_tangent.x, in_tangent.y),
+			Vector2(screen_size.x-out_tangent.x, out_tangent.y)
+		)
+	path_node.curve = new_curve
+
+#following function was given to me by AI and then edited
+func flip_path2d_vertically(path_node: Path2D):
+	var curve: Curve2D = path_node.curve
+	var new_curve = Curve2D.new()
+
+	for i in range(curve.point_count):
+		var point_position = curve.get_point_position(i)
+		var in_tangent = curve.get_point_in(i)
+		var out_tangent = curve.get_point_out(i)
+
+		# Negate the y-coordinate of the position and tangents
+		new_curve.add_point(
+			Vector2(point_position.x, screen_size.y-point_position.y),
+			Vector2(in_tangent.x, screen_size.y-in_tangent.y),
+			Vector2(out_tangent.x,screen_size.y -out_tangent.y)
+		)
+	path_node.curve = new_curve
 
 func slice_path(path,centre,length):
 	var newp
@@ -85,6 +143,9 @@ func get_random_direction(path,variance=PI/12):
 	return randf_range(angle-variance,angle+variance)
 	
 func generate_field(object,spawn_path,direction,speed,refire_speed,fire_duration,start_time,objects_perfire,variance=Vector2.ZERO):
+	if spawn_path is Vector2:
+		spawn_path=flip(spawn_path)
+		direction=flip(direction)
 	if spawn_path is Path2D and not spawn_path.is_inside_tree():
 		add_child(spawn_path)
 	add_child(field_scene.instantiate().init(object,spawn_path,direction,speed,refire_speed,fire_duration,start_time,objects_perfire,variance))
@@ -111,10 +172,11 @@ func generate_planet(name,start_time,pos=Vector2(50,-self.screen_size.y),dir=PI/
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
+func set_flip():
+	flip_b=randi_range(0,3)
 func play(start_time=0):
-	print("begin random field")
-	generate_random_field(comet_scene,0)
-
+	print("begin level")
+	
 	#add_child(field_scene.instantiate().init(asteroid_scene,$right,0,80,3,4,8,1))
 	#add_child(field_scene.instantiate().init(comet_scene,$left,PI,200,0.5,6,18,1))
 
