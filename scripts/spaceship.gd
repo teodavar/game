@@ -54,9 +54,19 @@ func controls_simple(delta):
 		$AnimatedSprite2D.stop()
 	velocity+=boost(velocity)
 	return velocity*delta
-	
+func check_shield():
+	if Input.is_action_pressed("shield"):
+		$AnimatedSprite2D/shield.animation="on"
+		$AnimatedSprite2D.play()
+		invulnerable=true
+	else:
+		invulnerable=false
+		$AnimatedSprite2D/shield.animation="off"
+		$AnimatedSprite2D.play()
+		
 func control_intertia(delta):
 	var acccel =Vector2.ZERO
+	#check_shield()
 	if Input.is_action_pressed("move_down"):
 		acccel.y+=1
 	if Input.is_action_pressed("move_up"):
