@@ -12,7 +12,7 @@ var asteroid_preset={
 	"pathc_min":0,"pathc_max":1,"pathl_min":0.04,"pathl_max":0.2,
 							"speed_min":90,"speed_max":180,"refire_min":1,"refire_max":4,
 							"duration_min":5,"duration_max":20,
-							"num_min":1,"num_max":1
+							"num_min":1,"num_max":1,"Svar":Vector2(0.5,2)
 	
 }
 
@@ -21,7 +21,7 @@ var comet_preset={
 	"pathc_min":0,"pathc_max":1,"pathl_min":0.01,"pathl_max":0.1,
 							"speed_min":200,"speed_max":400,"refire_min":0.1,"refire_max":0.5,
 							"duration_min":2,"duration_max":10,
-							"num_min":2,"num_max":5
+							"num_min":2,"num_max":5,"Svar":Vector2(0.5,2)
 	
 }
 #create levels using generate_field and generate_random_field
@@ -142,13 +142,13 @@ func get_random_direction(path,variance=PI/12):
 	var angle=(centre-point).angle()
 	return randf_range(angle-variance,angle+variance)
 	
-func generate_field(object,spawn_path,direction,speed,refire_speed,fire_duration,start_time,objects_perfire,variance=Vector2.ZERO):
+func generate_field(object,spawn_path,direction,speed,refire_speed,fire_duration,start_time,objects_perfire,variance=Vector2.ZERO,Svar=Vector2(0.5,2)):
 	if spawn_path is Vector2:
 		spawn_path=flip(spawn_path)
 		direction=flip(direction)
 	if spawn_path is Path2D and not spawn_path.is_inside_tree():
 		add_child(spawn_path)
-	add_child(field_scene.instantiate().init(object,spawn_path,direction,speed,refire_speed,fire_duration,start_time,objects_perfire,variance))
+	add_child(field_scene.instantiate().init(object,spawn_path,direction,speed,refire_speed,fire_duration,start_time,objects_perfire,variance,Svar))
 	
 func generate_random_field(object,start_time,param_preset=comet_preset):
 	var path = param_preset["path"]
@@ -160,13 +160,14 @@ func generate_random_field(object,start_time,param_preset=comet_preset):
 	var refire=randf_range(param_preset["refire_min"],param_preset["refire_max"])
 	var duration=randi_range(param_preset["duration_min"],param_preset["duration_max"])
 	var num=randi_range(param_preset["num_min"],param_preset["num_max"])
+	var Svar=param_preset["Svar"]
 	generate_field(object,path,dir,speed,refire,duration ,start_time,num)
 	return 0
 	
-func generate_planet(name,start_time,pos=Vector2(50,-self.screen_size.y),dir=PI/2,speed=25,variance=Vector2(100,0)):
+func generate_planet(name,start_time,pos=Vector2(50,-self.screen_size.y),dir=PI/2,speed=25,variance=Vector2(100,0),Svar=Vector2(0.5,2)):
 	var saturn=self.planet_scene.instantiate()
 	saturn.setplanet(name)
-	add_child(self.field_scene.instantiate().init(saturn,pos,dir,25,0,0,start_time,1,variance))
+	add_child(self.field_scene.instantiate().init(saturn,pos,dir,25,0,0,start_time,1,variance,Svar))
 	
 	#add_child(field_scene.instantiate().init(comet_scene,newp,PI/4,100,0.1,8,0,3))
 # Called every frame. 'delta' is the elapsed time since the previous frame.
