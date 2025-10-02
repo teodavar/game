@@ -2,9 +2,9 @@ extends level
 
 
 func play(start_time=0):
-	var offset=randf_range(0,1)
-	var customa= asteroid_preset.copy()
-	var customc=comet_preset.copy()
+	#var offset=randf_range(0,1)
+	#var customa= asteroid_preset.copy()
+	#var customc=comet_preset.copy()
 	level_duration=20
 	
 	generate_random_field(comet_scene,1)

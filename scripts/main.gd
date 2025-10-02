@@ -52,15 +52,17 @@ func new_game():
 	
 	#$random_level.play()
 	#await get_tree().create_timer($random_level.level_duration).timeout
-	$level3.play()
+	$random_level2.play()
 	var rlevel
-	await get_tree().create_timer($level3.level_duration).timeout
+	await get_tree().create_timer($random_level2.level_duration).timeout
 	for i in range(0,10):
 		rlevel=space_levels.pick_random()
 		rlevel.play()
 		await get_tree().create_timer(rlevel.level_duration).timeout
 		$random_level.play()
 		await get_tree().create_timer($random_level.level_duration).timeout
+		$random_level2.play()
+		await get_tree().create_timer($random_level2.level_duration).timeout
 		rlevel=planet_levels.pick_random()
 		rlevel.play()
 		await get_tree().create_timer(rlevel.level_duration).timeout

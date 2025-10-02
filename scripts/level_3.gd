@@ -11,7 +11,7 @@ func _process(delta: float) -> void:
 	pass
 
 func play(start_time=0):
-	#set_flip()
+	set_flip()
 	level_duration=20
 	var huge_asteroid=self.asteroid_scene.instantiate()
 	huge_asteroid.reshape(1.8)

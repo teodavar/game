@@ -24,6 +24,24 @@ var comet_preset={
 							"num_min":2,"num_max":5,"Svar":Vector2(0.5,2)
 	
 }
+var comet_preset_narrow={
+	#"path":$comet_spawn,
+	"pathc_min":0,"pathc_max":1,"pathl_min":0.01,"pathl_max":0.05,
+							"speed_min":300,"speed_max":400,"refire_min":0.1,"refire_max":0.5,
+							"duration_min":2,"duration_max":10,
+							"num_min":3,"num_max":5,"Svar":Vector2(0.5,2)
+	
+}
+var comet_preset_wide={
+	#"path":$comet_spawn,
+	"pathc_min":0,"pathc_max":1,"pathl_min":0.05,"pathl_max":0.15,
+							"speed_min":100,"speed_max":200,"refire_min":0.2,"refire_max":0.6,
+							"duration_min":5,"duration_max":10,
+							"num_min":1,"num_max":3,"Svar":Vector2(0.5,2)
+	
+}
+
+
 #create levels using generate_field and generate_random_field
 func flip(v):
 	var r=v
@@ -51,7 +69,9 @@ func flipy(v):
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	comet_preset["path"]=$comet_spawn
+	comet_preset_wide["path"]=$comet_spawn
 	asteroid_preset["path"]=$asteroid_spawn
+	comet_preset_narrow["path"]=$comet_spawn
 	screen_size= get_viewport_rect().size
 	# Replace with function body.
 #following function was given to me by AI 
