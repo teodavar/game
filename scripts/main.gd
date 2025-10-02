@@ -38,11 +38,8 @@ func game_over():
 	$MobTimer.stop()
 	#reset.emit()
 	
-func new_game():
-	score=0
-	$Spaceship.start($StartPosition.position)
-	$StartTimer.start()
-	#$tutorial.generate_random_field(comet_scene)
+func play_game_1():
+	"a sequence of levels that creates a game"
 	print("begin")
 	#$level2.play()
 	#await get_tree().create_timer($level2.level_duration).timeout
@@ -67,11 +64,12 @@ func new_game():
 		#rlevel.play()
 		#await get_tree().create_timer(rlevel.level_duration).timeout
 		
-	#$intro_level.play()
-	#await get_tree().create_timer($intro_level.level_duration).timeout
-	#add_child(field_scene.instantiate().init(comet_scene,$CometPath,3*PI/4,200,0.4,0,0,3))
-	#add_child(field_scene.instantiate().init(asteroid_scene,$spawnpath,0,100,6,0,6,1))
-	#add_child(field_scene.instantiate().init(asteroid_scene,$sp3,PI,50,0,0,18,1))
+	
+func new_game():
+	score=0
+	$Spaceship.start($StartPosition.position)
+	$StartTimer.start()
+	play_game_1()
 
 #func _on_spaceship_hit() -> void:
 	#print("11111111")
