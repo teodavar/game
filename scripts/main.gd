@@ -52,9 +52,9 @@ func new_game():
 	
 	#$random_level.play()
 	#await get_tree().create_timer($random_level.level_duration).timeout
-	$tutorial.play()
+	$level4.play()
 	var rlevel
-	await get_tree().create_timer($tutorial.level_duration).timeout
+	await get_tree().create_timer($level4.level_duration).timeout
 	for i in range(0,10):
 		rlevel=space_levels.pick_random()
 		rlevel.play()
@@ -82,9 +82,9 @@ func new_game():
 
 func _on_score_timer_timeout() -> void:
 	score+=1 # Replace with function body.
-func play_level(level):
-	level.play()
-	await get_tree().create_timer(level.level_duration).timeout
+func play_level(leveli):
+	leveli.play()
+	await get_tree().create_timer(leveli.level_duration).timeout
 	return 0
 func _on_start_timer_timeout() -> void:
 	$ScoreTimer.start()
@@ -95,5 +95,5 @@ func _on_spaceship_crash() -> void:
 
 
 func _on_spaceship_landing(current_lives: int, planet_id: String) -> void:
-	print("succesful landing on planet ",planet_id) 
+	print("succesful landing on planet ",planet_id," with ",current_lives," current lives") 
 	get_tree().call_deferred("change_scene_to_file","res://scene/game_over.tscn")# Replace with function body.

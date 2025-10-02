@@ -10,7 +10,7 @@ var level_duration=35
 var asteroid_preset={
 	#"path":$asteroid_spawn,
 	"pathc_min":0,"pathc_max":1,"pathl_min":0.04,"pathl_max":0.2,
-							"speed_min":100,"speed_max":200,"refire_min":1,"refire_max":4,
+							"speed_min":90,"speed_max":180,"refire_min":1,"refire_max":4,
 							"duration_min":5,"duration_max":20,
 							"num_min":1,"num_max":1
 	
@@ -165,7 +165,7 @@ func generate_random_field(object,start_time,param_preset=comet_preset):
 	
 func generate_planet(name,start_time,pos=Vector2(50,-self.screen_size.y),dir=PI/2,speed=25,variance=Vector2(100,0)):
 	var saturn=self.planet_scene.instantiate()
-	saturn.setplanet("saturn")
+	saturn.setplanet(name)
 	add_child(self.field_scene.instantiate().init(saturn,pos,dir,25,0,0,start_time,1,variance))
 	
 	#add_child(field_scene.instantiate().init(comet_scene,newp,PI/4,100,0.1,8,0,3))
@@ -176,6 +176,8 @@ func set_flip():
 	flip_b=randi_range(0,3)
 func play(start_time=0):
 	print("begin level")
+	
+	
 	
 	#add_child(field_scene.instantiate().init(asteroid_scene,$right,0,80,3,4,8,1))
 	#add_child(field_scene.instantiate().init(comet_scene,$left,PI,200,0.5,6,18,1))
