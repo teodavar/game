@@ -37,34 +37,22 @@ func game_over():
 	$ScoreTimer.stop()
 	$MobTimer.stop()
 	#reset.emit()
-	
+func play_level(level1):
+	level1.play()
+	await get_tree().create_timer(level1.level_duration).timeout
+	return
 func play_game_1():
 	"a sequence of levels that creates a game"
 	print("begin")
-	#$level2.play()
-	#await get_tree().create_timer($level2.level_duration).timeout
-	
-	#$level1.play()
-	#await get_tree().create_timer($level1.level_duration).timeout
-	
-	#$random_level.play()
-	#await get_tree().create_timer($random_level.level_duration).timeout
-	$random_level2.play()
+	#is called first, replace with level you want to test
+	await play_level($random_level2)
 	var rlevel
-	await get_tree().create_timer($random_level2.level_duration).timeout
 	for i in range(0,10):
 		rlevel=space_levels.pick_random()
-		rlevel.play()
-		await get_tree().create_timer(rlevel.level_duration).timeout
-		$random_level.play()
-		await get_tree().create_timer($random_level.level_duration).timeout
-		#$random_level2.play()
-		#await get_tree().create_timer($random_level2.level_duration).timeout
-		#rlevel=planet_levels.pick_random()
-		#rlevel.play()
-		#await get_tree().create_timer(rlevel.level_duration).timeout
-		
-	
+		await play_level(rlevel)
+		await play_level($random_level2)
+		await play_level($random_level)
+
 func new_game():
 	score=0
 	$Spaceship.start($StartPosition.position)
@@ -82,10 +70,7 @@ func new_game():
 
 func _on_score_timer_timeout() -> void:
 	score+=1 # Replace with function body.
-func play_level(leveli):
-	leveli.play()
-	await get_tree().create_timer(leveli.level_duration).timeout
-	return 0
+
 func _on_start_timer_timeout() -> void:
 	$ScoreTimer.start()
 
