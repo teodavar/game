@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://de8pbjay47e46"]
+[gd_scene load_steps=21 format=3 uid="uid://de8pbjay47e46"]
 
 [ext_resource type="Script" uid="uid://b4fout3yjkh4" path="res://scripts/main.gd" id="1_h2yge"]
 [ext_resource type="PackedScene" uid="uid://d1kphst6t2fxc" path="res://scene/spaceship.tscn" id="1_ig7tw"]
@@ -17,6 +17,8 @@
 [ext_resource type="PackedScene" uid="uid://cgffkeivpatu2" path="res://scene/level3.tscn" id="15_v2gmf"]
 [ext_resource type="PackedScene" uid="uid://qyc3ssnoemtn" path="res://scene/level4.tscn" id="16_jcbur"]
 [ext_resource type="PackedScene" uid="uid://da8b1ftrdat3y" path="res://scene/random_level2.tscn" id="17_smf0o"]
+[ext_resource type="PackedScene" uid="uid://bt8j0jbs4x4bu" path="res://scene/planet1.tscn" id="18_tv8i1"]
+[ext_resource type="PackedScene" uid="uid://bo8b4m5p6qwq5" path="res://scene/planet23.tscn" id="19_0vlqb"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_272bh"]
 shader = ExtResource("3_lquwl")
@@ -74,6 +76,11 @@ autoplay = true
 [node name="level4" parent="." instance=ExtResource("16_jcbur")]
 
 [node name="random_level2" parent="." instance=ExtResource("17_smf0o")]
+
+[node name="mercury" parent="." instance=ExtResource("18_tv8i1")]
+screen_size = Vector2(0, 0)
+
+[node name="venus_mars" parent="." instance=ExtResource("19_0vlqb")]
 
 [connection signal="crash" from="Spaceship" to="." method="_on_spaceship_crash"]
 [connection signal="landing" from="Spaceship" to="." method="_on_spaceship_landing"]

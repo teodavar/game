@@ -41,7 +41,77 @@ var comet_preset_wide={
 	
 }
 
+func make_easy():
+	asteroid_preset={
+	"path":$asteroid_spawn,
+	"pathc_min":0,"pathc_max":1,"pathl_min":0.04,"pathl_max":0.2,
+							"speed_min":90,"speed_max":150,"refire_min":1.5,"refire_max":4,
+							"duration_min":5,"duration_max":15,
+							"num_min":1,"num_max":1,"Svar":Vector2(0.5,2)
+	
+	}
 
+	comet_preset={
+	"path":$comet_spawn,
+	"pathc_min":0,"pathc_max":1,"pathl_min":0.01,"pathl_max":0.1,
+							"speed_min":150,"speed_max":300,"refire_min":0.2,"refire_max":0.6,
+							"duration_min":2,"duration_max":10,
+							"num_min":2,"num_max":5,"Svar":Vector2(0.7,1.4)
+	
+	}	
+	comet_preset_narrow={
+	"path":$comet_spawn,
+	"pathc_min":0,"pathc_max":1,"pathl_min":0.01,"pathl_max":0.04,
+							"speed_min":280,"speed_max":350,"refire_min":0.1,"refire_max":0.5,
+							"duration_min":2,"duration_max":10,
+							"num_min":3,"num_max":5,"Svar":Vector2(0.7,1.4)
+	
+		}
+	comet_preset_wide={
+	"path":$comet_spawn,
+	"pathc_min":0,"pathc_max":1,"pathl_min":0.03,"pathl_max":0.12,
+							"speed_min":75,"speed_max":150,"refire_min":0.2,"refire_max":0.6,
+							"duration_min":5,"duration_max":10,
+							"num_min":1,"num_max":3,"Svar":Vector2(0.7,1.4)
+	}
+	print("make easy")
+	return self
+func make_normal():
+	asteroid_preset={
+	"path":$asteroid_spawn,
+	"pathc_min":0,"pathc_max":1,"pathl_min":0.04,"pathl_max":0.2,
+							"speed_min":90,"speed_max":180,"refire_min":1,"refire_max":4,
+							"duration_min":5,"duration_max":20,
+							"num_min":1,"num_max":1,"Svar":Vector2(0.5,2)
+	
+	}
+
+	comet_preset={
+	"path":$comet_spawn,
+	"pathc_min":0,"pathc_max":1,"pathl_min":0.01,"pathl_max":0.1,
+							"speed_min":200,"speed_max":400,"refire_min":0.1,"refire_max":0.5,
+							"duration_min":2,"duration_max":10,
+							"num_min":2,"num_max":5,"Svar":Vector2(0.5,2)
+	
+	}
+	comet_preset_narrow={
+	"path":$comet_spawn,
+	"pathc_min":0,"pathc_max":1,"pathl_min":0.01,"pathl_max":0.05,
+							"speed_min":300,"speed_max":400,"refire_min":0.1,"refire_max":0.5,
+							"duration_min":2,"duration_max":10,
+							"num_min":3,"num_max":5,"Svar":Vector2(0.5,2)
+	
+	}
+	comet_preset_wide={
+	"path":$comet_spawn,
+	"pathc_min":0,"pathc_max":1,"pathl_min":0.05,"pathl_max":0.15,
+							"speed_min":100,"speed_max":200,"refire_min":0.2,"refire_max":0.6,
+							"duration_min":5,"duration_max":10,
+							"num_min":1,"num_max":3,"Svar":Vector2(0.5,2)
+	
+	}
+	return self
+	
 #create levels using generate_field and generate_random_field
 func flip(v):
 	var r=v
@@ -184,10 +254,11 @@ func generate_random_field(object,start_time,param_preset=comet_preset):
 	generate_field(object,path,dir,speed,refire,duration ,start_time,num)
 	return 0
 	
-func generate_planet(name,start_time,pos=Vector2(50,-self.screen_size.y),dir=PI/2,speed=25,variance=Vector2(100,0),Svar=Vector2(0.5,2)):
+func generate_planet(name,scale,start_time,pos=Vector2(50,-self.screen_size.y),dir=PI/2,speed=25,variance=Vector2(100,0),Svar=Vector2(0.5,2)):
 	var saturn=self.planet_scene.instantiate()
 	saturn.setplanet(name)
-	add_child(self.field_scene.instantiate().init(saturn,pos,dir,25,0,0,start_time,1,variance,Svar))
+	saturn.reshape(scale)
+	add_child(self.field_scene.instantiate().init(saturn,pos,dir,speed,0,0,start_time,1,variance,Svar))
 	
 	#add_child(field_scene.instantiate().init(comet_scene,newp,PI/4,100,0.1,8,0,3))
 # Called every frame. 'delta' is the elapsed time since the previous frame.

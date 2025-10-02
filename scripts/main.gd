@@ -45,7 +45,8 @@ func play_game_1():
 	"a sequence of levels that creates a game"
 	print("begin")
 	#is called first, replace with level you want to test
-	await play_level($random_level2)
+	await play_level($venus_mars.make_easy())
+	await play_level($random_level.make_easy())
 	var rlevel
 	for i in range(0,10):
 		rlevel=space_levels.pick_random()

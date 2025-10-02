@@ -159,7 +159,7 @@ func recoil():
 	print("recoil!!!!!")
 	position=position+Vector2(0,5) # recoil after hit
 	position=position.clamp(Vector2.ZERO,screen_size)
-	await get_tree().create_timer(0.3).timeout
+	await get_tree().create_timer(0.6).timeout
 	hit_shield=false
 	invulnerable=false
 	$AnimatedSprite2D/shield.animation="off"
