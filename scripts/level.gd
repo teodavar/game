@@ -20,23 +20,23 @@ var comet_preset={
 	#"path":$comet_spawn,
 	"pathc_min":0,"pathc_max":1,"pathl_min":0.01,"pathl_max":0.1,
 							"speed_min":200,"speed_max":400,"refire_min":0.1,"refire_max":0.5,
-							"duration_min":2,"duration_max":10,
+							"duration_min":2,"duration_max":8,
 							"num_min":2,"num_max":5,"Svar":Vector2(0.5,2)
 	
 }
 var comet_preset_narrow={
 	#"path":$comet_spawn,
-	"pathc_min":0,"pathc_max":1,"pathl_min":0.01,"pathl_max":0.05,
+	"pathc_min":0,"pathc_max":1,"pathl_min":0.01,"pathl_max":0.03,
 							"speed_min":300,"speed_max":400,"refire_min":0.1,"refire_max":0.5,
-							"duration_min":2,"duration_max":10,
+							"duration_min":2,"duration_max":8,
 							"num_min":3,"num_max":5,"Svar":Vector2(0.5,2)
 	
 }
 var comet_preset_wide={
 	#"path":$comet_spawn,
 	"pathc_min":0,"pathc_max":1,"pathl_min":0.05,"pathl_max":0.15,
-							"speed_min":100,"speed_max":200,"refire_min":0.2,"refire_max":0.6,
-							"duration_min":5,"duration_max":10,
+							"speed_min":100,"speed_max":180,"refire_min":0.2,"refire_max":0.6,
+							"duration_min":5,"duration_max":8,
 							"num_min":1,"num_max":3,"Svar":Vector2(0.5,2)
 	
 }
@@ -46,7 +46,7 @@ func make_easy():
 	"path":$asteroid_spawn,
 	"pathc_min":0,"pathc_max":1,"pathl_min":0.04,"pathl_max":0.2,
 							"speed_min":90,"speed_max":150,"refire_min":1.5,"refire_max":4,
-							"duration_min":5,"duration_max":15,
+							"duration_min":5,"duration_max":18,
 							"num_min":1,"num_max":1,"Svar":Vector2(0.5,2)
 	
 	}
@@ -54,8 +54,8 @@ func make_easy():
 	comet_preset={
 	"path":$comet_spawn,
 	"pathc_min":0,"pathc_max":1,"pathl_min":0.01,"pathl_max":0.1,
-							"speed_min":150,"speed_max":300,"refire_min":0.2,"refire_max":0.6,
-							"duration_min":2,"duration_max":10,
+							"speed_min":180,"speed_max":280,"refire_min":0.2,"refire_max":0.6,
+							"duration_min":2,"duration_max":8,
 							"num_min":2,"num_max":5,"Svar":Vector2(0.7,1.4)
 	
 	}	
@@ -63,14 +63,14 @@ func make_easy():
 	"path":$comet_spawn,
 	"pathc_min":0,"pathc_max":1,"pathl_min":0.01,"pathl_max":0.04,
 							"speed_min":280,"speed_max":350,"refire_min":0.1,"refire_max":0.5,
-							"duration_min":2,"duration_max":10,
+							"duration_min":2,"duration_max":8,
 							"num_min":3,"num_max":5,"Svar":Vector2(0.7,1.4)
 	
 		}
 	comet_preset_wide={
 	"path":$comet_spawn,
-	"pathc_min":0,"pathc_max":1,"pathl_min":0.03,"pathl_max":0.12,
-							"speed_min":75,"speed_max":150,"refire_min":0.2,"refire_max":0.6,
+	"pathc_min":0,"pathc_max":1,"pathl_min":0.03,"pathl_max":0.15,
+							"speed_min":75,"speed_max":120,"refire_min":0.2,"refire_max":0.6,
 							"duration_min":5,"duration_max":10,
 							"num_min":1,"num_max":3,"Svar":Vector2(0.7,1.4)
 	}
@@ -81,7 +81,7 @@ func make_normal():
 	"path":$asteroid_spawn,
 	"pathc_min":0,"pathc_max":1,"pathl_min":0.04,"pathl_max":0.2,
 							"speed_min":90,"speed_max":180,"refire_min":1,"refire_max":4,
-							"duration_min":5,"duration_max":20,
+							"duration_min":5,"duration_max":18,
 							"num_min":1,"num_max":1,"Svar":Vector2(0.5,2)
 	
 	}
@@ -90,23 +90,23 @@ func make_normal():
 	"path":$comet_spawn,
 	"pathc_min":0,"pathc_max":1,"pathl_min":0.01,"pathl_max":0.1,
 							"speed_min":200,"speed_max":400,"refire_min":0.1,"refire_max":0.5,
-							"duration_min":2,"duration_max":10,
+							"duration_min":2,"duration_max":8,
 							"num_min":2,"num_max":5,"Svar":Vector2(0.5,2)
 	
 	}
 	comet_preset_narrow={
 	"path":$comet_spawn,
-	"pathc_min":0,"pathc_max":1,"pathl_min":0.01,"pathl_max":0.05,
+	"pathc_min":0,"pathc_max":1,"pathl_min":0.01,"pathl_max":0.03,
 							"speed_min":300,"speed_max":400,"refire_min":0.1,"refire_max":0.5,
-							"duration_min":2,"duration_max":10,
+							"duration_min":2,"duration_max":8,
 							"num_min":3,"num_max":5,"Svar":Vector2(0.5,2)
 	
 	}
 	comet_preset_wide={
 	"path":$comet_spawn,
-	"pathc_min":0,"pathc_max":1,"pathl_min":0.05,"pathl_max":0.15,
-							"speed_min":100,"speed_max":200,"refire_min":0.2,"refire_max":0.6,
-							"duration_min":5,"duration_max":10,
+	"pathc_min":0,"pathc_max":1,"pathl_min":0.05,"pathl_max":0.2,
+							"speed_min":100,"speed_max":180,"refire_min":0.2,"refire_max":0.6,
+							"duration_min":5,"duration_max":8,
 							"num_min":1,"num_max":3,"Svar":Vector2(0.5,2)
 	
 	}

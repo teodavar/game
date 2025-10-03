@@ -20,12 +20,6 @@ _data = {
 }
 point_count = 2
 
-[sub_resource type="Curve2D" id="Curve2D_won01"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, -120, -117, 0, 0, 0, 0, 1419, -145, 0, 0, 0, 0, 1450, 862, 0, 0, 0, 0, -135, 864, 0, 0, 0, 0, -120, -117)
-}
-point_count = 5
-
 [sub_resource type="Curve2D" id="Curve2D_mqdaa"]
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, -298, -275, 0, 0, 0, 0, 1669, -331, 0, 0, 0, 0, 1651, 1057, 0, 0, 0, 0, -298, 1062, 0, 0, 0, 0, -298, -275)
@@ -35,6 +29,12 @@ point_count = 5
 [sub_resource type="Curve2D" id="Curve2D_mo30s"]
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 276, 192, 0, 0, 0, 0, 1003, 174, 0, 0, 0, 0, 1003, 532, 0, 0, 0, 0, 283, 532, 0, 0, 0, 0, 276, 192)
+}
+point_count = 5
+
+[sub_resource type="Curve2D" id="Curve2D_6odji"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -249, -220, 0, 0, 0, 0, 1523, -240, 0, 0, 0, 0, 1539, 940, 0, 0, 0, 0, -241, 978, 0, 0, 0, 0, -249, -220)
 }
 point_count = 5
 
@@ -50,11 +50,11 @@ curve = SubResource("Curve2D_hegci")
 [node name="right" type="Path2D" parent="."]
 curve = SubResource("Curve2D_h8sj1")
 
-[node name="asteroid_spawn" type="Path2D" parent="."]
-curve = SubResource("Curve2D_won01")
-
 [node name="comet_spawn" type="Path2D" parent="."]
 curve = SubResource("Curve2D_mqdaa")
 
 [node name="test" type="Path2D" parent="."]
 curve = SubResource("Curve2D_mo30s")
+
+[node name="asteroid_spawn" type="Path2D" parent="."]
+curve = SubResource("Curve2D_6odji")
