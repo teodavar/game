@@ -86,7 +86,7 @@ func mars_venus(start_time=0):
 	await get_tree().create_timer(level_duration).timeout
 func Suerza(start_time=0):
 	level_duration=50
-	generate_planet("Suerza" ,5,start_time+0,Vector2(X/2,-780),PI/2,20,Vector2(0,0),Vector2(0.9,1.2))
+	generate_planet("Suerza" ,5,start_time+0,Vector2(X/2,-900),PI/2,20,Vector2(0,0),Vector2(0.9,1.2))
 	await get_tree().create_timer(level_duration).timeout
 func earth(start_time=0):
 	level_duration=5
