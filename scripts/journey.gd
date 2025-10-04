@@ -73,6 +73,15 @@ func play_journey():
 		await play_level($random_level.make_normal(2))
 	await simple_level2()
 	await Suerza()
+	
+	#endless mode (no one would last 30 mins of this)
+	for i in range(0,10):
+		await random_simple()
+		await play_level($random_level2.make_normal(2))
+		rlevel=space_levels.pick_random()
+		await play_level(rlevel)
+		await play_level($random_level.make_normal(2))
+	
 func random_simple(start_time=0):
 	var c=randi_range(0,1)
 	if c==0:
@@ -88,6 +97,7 @@ func Suerza(start_time=0):
 	level_duration=50
 	generate_planet("Suerza" ,5,start_time+0,Vector2(X/2,-900),PI/2,20,Vector2(0,0),Vector2(0.9,1.2))
 	await get_tree().create_timer(level_duration).timeout
+
 func earth(start_time=0):
 	level_duration=5
 	generate_planet("earth" ,1.8,start_time+0,Vector2(100,-self.screen_size.y/2-100),PI/3,50,Vector2(100,0),Vector2(0.9,1.2))
