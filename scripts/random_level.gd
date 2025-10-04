@@ -7,6 +7,7 @@ func play(start_time=0):
 	generate_random_field(asteroid_scene,2,asteroid_preset)
 	#print(comet_preset_narrow)
 	generate_random_field(comet_scene,8,comet_preset_narrow)
-	generate_random_field(comet_scene,13,comet_preset)
+	if dif_level>1:
+		generate_random_field(comet_scene,13,comet_preset)
 	
 	return 20

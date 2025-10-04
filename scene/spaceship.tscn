@@ -25,6 +25,11 @@ animations = [{
 "name": &"explode2",
 "speed": 5.0
 }, {
+"frames": [],
+"loop": true,
+"name": &"explode3",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_wkmid")
@@ -88,6 +93,33 @@ tracks/1/keys = {
 "values": [Color(1, 1, 1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_mdxg7"]
+resource_name = "explosion"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(5, 5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_wkmid"]
 resource_name = "planet_bump"
 length = 0.7
@@ -116,33 +148,6 @@ tracks/1/keys = {
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_mdxg7"]
-resource_name = "explosion"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(3, 3)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mdxg7"]
 _data = {
 &"RESET": SubResource("Animation_nsyhb"),
@@ -151,8 +156,7 @@ _data = {
 }
 
 [node name="Spaceship" type="Area2D"]
-position = Vector2(6, 2)
-collision_mask = 15
+collision_mask = 255
 script = ExtResource("1_dl81w")
 impulse = 1500
 inertia = true
@@ -163,7 +167,7 @@ metadata/_edit_group_ = true
 position = Vector2(0.19999693, 4.799995)
 scale = Vector2(0.12, 0.12)
 sprite_frames = SubResource("SpriteFrames_c0nl8")
-animation = &"fly"
+animation = &"off"
 
 [node name="shield" type="AnimatedSprite2D" parent="AnimatedSprite2D"]
 position = Vector2(0, -108.33333)
@@ -175,7 +179,7 @@ animation = &"on"
 position = Vector2(81.66672, -139.99998)
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_c0nl8")
-animation = &"explode2"
+animation = &"explode3"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.19999695, 4.7999954)

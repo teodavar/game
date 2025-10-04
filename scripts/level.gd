@@ -6,7 +6,10 @@ class_name level extends Node2D
 #https://nineplanets.org/planets-transparent-background/
 @export var screen_size=Vector2.ZERO
 var flip_b=0
+var X
+var Y
 var level_duration=35
+var dif_level=2
 var asteroid_preset={
 	#"path":$asteroid_spawn,
 	"pathc_min":0,"pathc_max":1,"pathl_min":0.04,"pathl_max":0.2,
@@ -41,7 +44,8 @@ var comet_preset_wide={
 	
 }
 
-func make_easy():
+func make_easy(dif=2):
+	dif_level=dif
 	asteroid_preset={
 	"path":$asteroid_spawn,
 	"pathc_min":0,"pathc_max":1,"pathl_min":0.04,"pathl_max":0.2,
@@ -76,7 +80,8 @@ func make_easy():
 	}
 	print("make easy")
 	return self
-func make_normal():
+func make_normal(dif=2):
+	dif_level=dif
 	asteroid_preset={
 	"path":$asteroid_spawn,
 	"pathc_min":0,"pathc_max":1,"pathl_min":0.04,"pathl_max":0.2,
@@ -143,6 +148,8 @@ func _ready() -> void:
 	asteroid_preset["path"]=$asteroid_spawn
 	comet_preset_narrow["path"]=$comet_spawn
 	screen_size= get_viewport_rect().size
+	X=screen_size.x
+	Y=screen_size.y
 	# Replace with function body.
 #following function was given to me by AI 
 func circular_slice(array_to_slice: Array, start_index: int, end_index: int) -> Array:

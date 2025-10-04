@@ -1,6 +1,6 @@
 extends RigidBody2D
 
-
+var col_layer=3
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	self.z_index=-5
@@ -25,6 +25,14 @@ func collision_with_spacceship(ship) -> void:
 	#hide()
 	#queue_free()
 
-
+func change_collision():
+	#freeze=true
+	print("bitmaps")
+	print(collision_layer)
+	print(collision_mask)
+	collision_layer=8
+	collision_mask+=4
+	#freeze=false
+	#apply_central_impulse(Vector2.ZERO)
 func _on_body_entered(body: Node) -> void:
 	pass # Replace with function body.
