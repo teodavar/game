@@ -33,14 +33,19 @@ func play_journey():
 	var custom_collection=[intro_level,simple_level1]
 	await play_level($tutorial)
 	await intro_level()
+	await play_level($random_level.make_easy(1))
 	await simple_level1()
+	await play_level($random_level2.make_easy(1))
 	rlevel=sl.pop_front()
+	await play_level(rlevel)
 	print(space_levels)
 	await mercury()
+	await intro_level()
 	await play_level($random_level.make_easy(1))
+	await simple_level1()
 	await play_level($random_level2.make_easy(1))
-	var f=custom_collection.pick_random()
-	await f
+	rlevel=sl.pop_front()
+	await play_level(rlevel)
 	await mars_venus()
 	await simple_level3()
 	
@@ -51,6 +56,8 @@ func play_journey():
 		await play_level(rlevel)
 		rlevel=space_levels.pick_random()
 		await play_level(rlevel)
+	rlevel=sl.pop_front()
+	await play_level(rlevel)
 	await simple_level2()
 
 func mars_venus(start_time=0):
@@ -123,4 +130,3 @@ func intro_level(start_time=0):
 	generate_field(huge_asteroid,Vector2(1280+200,250),PI+PI/50,80,0,0,16,1,Vector2(0,150))
 	await get_tree().create_timer(level_duration).timeout
 	return level_duration
-	
