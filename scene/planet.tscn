@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://cj4ogd8kn1elh"]
+[gd_scene load_steps=10 format=3 uid="uid://cj4ogd8kn1elh"]
 
 [ext_resource type="Script" uid="uid://b8mtrabrl6xg" path="res://scripts/planet.gd" id="1_ohpux"]
 [ext_resource type="Texture2D" uid="uid://bw6h80s5enj0a" path="res://assets/Textures/Planets/mercury.png" id="2_ataao"]
 [ext_resource type="Texture2D" uid="uid://u54qxkafbvel" path="res://assets/Textures/Planets/earth.png" id="2_u71er"]
 [ext_resource type="Texture2D" uid="uid://c6umewkbw8qyy" path="res://assets/Textures/Planets/mars.png" id="3_l5gcb"]
-[ext_resource type="Texture2D" uid="uid://conigaiu033nc" path="res://assets/Textures/Planets/Planet3.png" id="5_u71er"]
+[ext_resource type="Texture2D" uid="uid://d1cwc3unlvsgb" path="res://assets/Textures/Planets/Planet1.png" id="3_vvgff"]
+[ext_resource type="Texture2D" uid="uid://b7ooxck6vcnm6" path="res://assets/Textures/Planets/saturn.png" id="6_l5gcb"]
 [ext_resource type="Texture2D" uid="uid://c2q6p5hbrp61o" path="res://assets/Textures/Planets/venus.png" id="6_y3myt"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_squbt"]
@@ -15,6 +16,14 @@ animations = [{
 }],
 "loop": true,
 "name": &"earth",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_vvgff")
+}],
+"loop": true,
+"name": &"earth2",
 "speed": 5.0
 }, {
 "frames": [{
@@ -35,7 +44,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("5_u71er")
+"texture": ExtResource("6_l5gcb")
 }],
 "loop": true,
 "name": &"saturn",
@@ -54,16 +63,15 @@ animations = [{
 radius = 157.38487
 
 [node name="planet" type="RigidBody2D" groups=["comets2", "planet"]]
-collision_layer = 8
+collision_layer = 32
 mass = 1000.0
 gravity_scale = 0.0
 inertia = 1000.0
 script = ExtResource("1_ohpux")
-metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_squbt")
-animation = &"venus"
+animation = &"earth2"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5027285
@@ -71,7 +79,8 @@ shape = SubResource("CircleShape2D_u71er")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2(14, 2)
-rect = Rect2(-243, -177, 439, 347)
+rect = Rect2(-240, -197, 436, 392)
+metadata/_edit_group_ = true
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

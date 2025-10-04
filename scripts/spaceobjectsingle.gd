@@ -12,6 +12,7 @@ extends Node2D
 @export var variance=Vector2(0,0)
 var particular = false
 var objectp
+var Svar=Vector2(0.5,2)
 var path
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -27,7 +28,7 @@ func _ready() -> void:
 	else:
 		firefirst()
 
-func init(objectsci,pathi,directioni=PI/2,speedi=100,refirei=0,durationi=0,starti=0,Ni=1,Var=Vector2(0,0)):
+func init(objectsci,pathi,directioni=PI/2,speedi=100,refirei=0,durationi=0,starti=0,Ni=1,Var=Vector2(0,0),Svari=Vector2(0.5,2)):
 	if objectsci is not PackedScene:
 		objectp = objectsci
 		particular = true
@@ -42,6 +43,7 @@ func init(objectsci,pathi,directioni=PI/2,speedi=100,refirei=0,durationi=0,start
 	direction=directioni
 	speed=speedi
 	path=pathi
+	Svar=Svari
 	
 	startime=starti
 	variance=Var
@@ -81,9 +83,9 @@ func fire():
 		#print(object.position)
 		#comet.position=Vector2(640, 600)# Replace with function body.
 		object.rotation= direction
-		var scale=randf_range(0.5,2)
+		var scale=randf_range(Svar.x,Svar.y)
 		object.reshape(scale)
-		var velocity=Vector2(randf_range(speed*0.5,speed*2 ),0)
+		var velocity=Vector2(randf_range(speed*Svar.x,speed*Svar.y ),0)
 		object.linear_velocity = velocity.rotated(direction)
 		if object.is_inside_tree():
 			print("given planet")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://de8pbjay47e46"]
+[gd_scene load_steps=12 format=3 uid="uid://de8pbjay47e46"]
 
 [ext_resource type="Script" uid="uid://b4fout3yjkh4" path="res://scripts/main.gd" id="1_h2yge"]
 [ext_resource type="PackedScene" uid="uid://d1kphst6t2fxc" path="res://scene/spaceship.tscn" id="1_ig7tw"]
@@ -8,12 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://dcdkapui08olm" path="res://scene/spaceobjectsingle.tscn" id="4_p1hux"]
 [ext_resource type="PackedScene" uid="uid://jp5ejq7fv784" path="res://scene/hud.tscn" id="5_of57s"]
 [ext_resource type="Texture2D" uid="uid://4q088qgb18dj" path="res://assets/Textures/Background_blue.png" id="7_tqoya"]
-[ext_resource type="PackedScene" uid="uid://cbljwt6dwmcqm" path="res://scene/intro_level.tscn" id="9_b5f6u"]
-[ext_resource type="PackedScene" uid="uid://debvso3hb33tj" path="res://scene/tutorial.tscn" id="10_tqoya"]
+[ext_resource type="PackedScene" uid="uid://dyb3usbe1j0q5" path="res://scene/journey.tscn" id="10_tqoya"]
 [ext_resource type="AudioStream" uid="uid://ng1j5l82ovx5" path="res://assets/Audio/Matooma - First Step on Mars.wav" id="11_k65ib"]
-[ext_resource type="PackedScene" uid="uid://bsx12p356iv2s" path="res://scene/random_level.tscn" id="12_wscrc"]
-[ext_resource type="PackedScene" uid="uid://d1an7vgpqxga5" path="res://scene/level1.tscn" id="13_mswub"]
-[ext_resource type="PackedScene" uid="uid://b6lbvtb5noi4o" path="res://scene/level2.tscn" id="14_hybxs"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_272bh"]
 shader = ExtResource("3_lquwl")
@@ -51,20 +47,12 @@ one_shot = true
 [node name="StartPosition" type="Marker2D" parent="."]
 position = Vector2(640, 920)
 
-[node name="intro_level" parent="." instance=ExtResource("9_b5f6u")]
-
-[node name="tutorial" parent="." instance=ExtResource("10_tqoya")]
-
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("11_k65ib")
 volume_db = -3.0
 autoplay = true
 
-[node name="random_level" parent="." instance=ExtResource("12_wscrc")]
-
-[node name="level1" parent="." instance=ExtResource("13_mswub")]
-
-[node name="level2" parent="." instance=ExtResource("14_hybxs")]
+[node name="journey" parent="." instance=ExtResource("10_tqoya")]
 
 [connection signal="crash" from="Spaceship" to="." method="_on_spaceship_crash"]
 [connection signal="landing" from="Spaceship" to="." method="_on_spaceship_landing"]

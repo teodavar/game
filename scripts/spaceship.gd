@@ -1,5 +1,5 @@
 extends Area2D
-
+#<a href="https://www.nicepng.com/ourpic/u2q8a9w7w7o0w7q8_explosion-debris-png-visual-arts/" target="_blank">Explosion Debris Png - Visual Arts @nicepng.com</a>
 signal lives_changed(current_lives: int)
 signal crash
 signal hit
@@ -33,6 +33,7 @@ func _ready() -> void:
 	self.z_index=-3
 	$AnimatedSprite2D.animation="fly"
 	$AnimatedSprite2D/shield.animation="off"
+	$AnimatedSprite2D/explosion.animation="off"
 	lives = max_lives
 	emit_signal("lives_changed", lives)
 	hide()
@@ -159,7 +160,7 @@ func recoil():
 	print("recoil!!!!!")
 	position=position+Vector2(0,5) # recoil after hit
 	position=position.clamp(Vector2.ZERO,screen_size)
-	await get_tree().create_timer(0.3).timeout
+	await get_tree().create_timer(0.6).timeout
 	hit_shield=false
 	invulnerable=false
 	$AnimatedSprite2D/shield.animation="off"
@@ -192,7 +193,7 @@ func got_hit():
 	else:
 		#recoil()
 		hit.emit()
-	recoil()
+		recoil()
 	
 func crashed():
 	
@@ -202,7 +203,16 @@ func crashed():
 		return
 	lives = 0
 	emit_signal("lives_changed", lives)
+	await explode()
 	crash.emit()
+func explode():
+	set_process(false)
+	set_physics_process(false)
+	$AnimatedSprite2D.animation="off"
+	$AnimatedSprite2D/shield.animation="off"
+	$AnimatedSprite2D/explosion.animation="explode2"
+	anim.play("explosion")
+	await  anim.animation_finished
 	
 	
 	

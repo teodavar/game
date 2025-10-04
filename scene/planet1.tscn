@@ -1,0 +1,52 @@
+[gd_scene load_steps=7 format=3 uid="uid://bt8j0jbs4x4bu"]
+
+[ext_resource type="Script" uid="uid://br5lis8dnqm2o" path="res://scripts/mercury.gd" id="1_o7ayj"]
+
+[sub_resource type="Curve2D" id="Curve2D_epgyv"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 32, -43, 0, 0, 0, 0, 1306, -37, 0, 0, 0, 0, 1314, 692)
+}
+point_count = 3
+
+[sub_resource type="Curve2D" id="Curve2D_hegci"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -208, 7, 0, 0, 0, 0, -226, 424)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_h8sj1"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1593, 42, 0, 0, 0, 0, 1603, 507)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_jskht"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -120, -117, 0, 0, 0, 0, 1419, -145, 0, 0, 0, 0, 1450, 862, 0, 0, 0, 0, -135, 864, 0, 0, 0, 0, -120, -117)
+}
+point_count = 5
+
+[sub_resource type="Curve2D" id="Curve2D_oyf75"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -298, -275, 0, 0, 0, 0, 1669, -331, 0, 0, 0, 0, 1651, 1057, 0, 0, 0, 0, -298, 1062, 0, 0, 0, 0, -298, -275)
+}
+point_count = 5
+
+[node name="mercury" type="Node2D"]
+script = ExtResource("1_o7ayj")
+screen_size = null
+
+[node name="CometPath" type="Path2D" parent="."]
+curve = SubResource("Curve2D_epgyv")
+
+[node name="spawnpath" type="Path2D" parent="."]
+curve = SubResource("Curve2D_hegci")
+
+[node name="sp3" type="Path2D" parent="."]
+curve = SubResource("Curve2D_h8sj1")
+
+[node name="asteroid_spawn" type="Path2D" parent="."]
+curve = SubResource("Curve2D_jskht")
+
+[node name="comet_spawn" type="Path2D" parent="."]
+curve = SubResource("Curve2D_oyf75")

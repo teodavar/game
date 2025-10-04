@@ -1,5 +1,7 @@
 extends RigidBody2D
 
+# <a href="https://lovepik.com/images/png-blue.html">Blue Png vectors by Lovepik.com</a>
+#https://www.deviantart.com/prussiaart/art/Space-explosion-on-a-transparent-background-812998770
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -7,6 +9,7 @@ func _ready() -> void:
 	var comet_types =Array($AnimatedSprite2D.sprite_frames.get_animation_names())
 	#print(comet_types)
 	$AnimatedSprite2D.animation="fall"
+	$AnimatedSprite2D/explode.animation="off"
 	$AnimatedSprite2D.play()
 	 # Replace with function body.
 func reshape(scale):
@@ -32,8 +35,11 @@ func collision_with_spacceship(ship) -> void:
 func explode():
 	self.linear_velocity=Vector2.ZERO
 	$CollisionShape2D.set_deferred("disabled",true)
-	$AnimatedSprite2D.animation="explode"
-	await get_tree().create_timer(0.1).timeout
+	$AnimatedSprite2D.animation="off"
+	$AnimatedSprite2D/explode.animation="explode2"
+	#$AnimatedSprite2D.play()
+	$AnimationPlayer.play("explode")
+	await  $AnimationPlayer.animation_finished
 	print("commet exploded")
 	queue_free()
 func _on_body_entered(body: Node) -> void:

@@ -10,7 +10,7 @@ func _on_quite_pressed():
 
 func _on_play_mouse_entered():
 	$Hover.play()
-
-
+	
+	 
 func _on_quit_mouse_entered():
 	$Hover.play()

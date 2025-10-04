@@ -47,7 +47,7 @@ height = 233.32208
 
 [node name="asteroid" type="RigidBody2D" groups=["comets2"]]
 collision_layer = 4
-collision_mask = 3
+collision_mask = 139
 mass = 1000.0
 gravity_scale = 0.0
 script = ExtResource("1_gktfr")
